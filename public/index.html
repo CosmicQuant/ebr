@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tana Green Investments</title>
+  <link rel="icon" href="/assets/favicon.ico" />
+</head>
+<body>
+  <!-- Netlify static fallback form for detection -->
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none">
+    <input type="hidden" name="form-name" value="contact" />
+    <p hidden>
+      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+    </p>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="organization" />
+    <textarea name="message"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+  <div id="root"></div>
+</body>
+</html>

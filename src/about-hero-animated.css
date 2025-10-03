@@ -1,0 +1,11 @@
+.about-hero-animated {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: aboutHeroFadeUp 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.2s forwards;
+}
+@keyframes aboutHeroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
