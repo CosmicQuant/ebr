@@ -950,19 +950,6 @@ function App() {
                 </button>
               ))}
             </nav>
-
-            {/* Social media links in header */}
-            <div className="nav-social" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-              <a href="https://wa.me/254797185854?text=Hello%20EcoFriendly%20Beach%20Rentals!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                <img src="/assets/whatsapp.png" alt="WhatsApp" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
-              </a>
-              <a href="https://instagram.com/Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                <img src="/assets/ig.PNG" alt="Instagram" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
-              </a>
-              <a href="https://tiktok.com/@Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                <img src="/assets/tiktok.png" alt="TikTok" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
-              </a>
-            </div>
             
             {/* Hamburger icon for mobile */}
             <button 
