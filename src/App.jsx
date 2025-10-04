@@ -6,8 +6,8 @@ import { animateOnScroll, initScrollAnimations, animateProgramsVerticalOnScroll 
 
 const navigationItems = [
   { id: 'home', label: 'Home', icon: '🏠' },
-  { id: 'about', label: 'About', icon: '🏖️' },
   { id: 'products', label: 'Products', icon: '🏕️' },
+  { id: 'about', label: 'About', icon: '🏖️' },
   { id: 'contact', label: 'Contact', icon: '📧' }
 ];
 
@@ -15,7 +15,7 @@ const heroImages = {
   home: '/assets/vace.jpg',
   about: '/assets/landing3.jpeg',
   products: '/assets/twotents.jpeg',
-  contact: '/assets/landingch1.jpg'
+  contact: '/assets/landing3.png'
 };
 
 const impactStats = [
@@ -28,30 +28,30 @@ const impactStats = [
 // Products data
 const productCategories = [
   {
-    id: 'event-packages',
-    title: 'Event Packages',
+    id: 'our-packages',
+    title: 'Our Packages',
     description: 'Complete setup packages for your perfect beach event',
     products: [
       {
+        id: 'weddings',
+        name: 'Weddings',
+        image: '/assets/landing3.jpeg',
+        description: 'Create the wedding of your dreams with our romantic beach ceremony setups. From intimate vow exchanges to grand celebrations, we provide elegant decorations, comfortable seating, and stunning backdrops.',
+        features: ['Romantic Setup', 'Elegant Decorations', 'Comfortable Seating']
+      },
+      {
+        id: 'events',
+        name: 'Events',
+        image: '/assets/landing1.png',
+        description: 'Transform any occasion into an unforgettable beachside celebration. Whether it\'s a corporate retreat, birthday party, anniversary celebration, or family reunion, our comprehensive event packages include premium seating, dining setups, and entertainment areas.',
+        features: ['Premium Seating', 'Dining Setups', 'Entertainment Areas']
+      },
+      {
         id: 'experiences',
         name: 'Experiences',
-        image: '/assets/landing3.png',
-        description: 'Unique beach experiences and intimate gatherings with special atmosphere elements',
-        features: ['Unique Experiences', 'Ambient Lighting', 'Decorative Setup']
-      },
-      {
-        id: 'gatherings',
-        name: 'Gatherings',
-        image: '/assets/landing2.jpeg',
-        description: 'Ideal for social events and celebrations with dining setup and entertainment area',
-        features: ['Dining Setup', 'Entertainment Area', 'Social Seating']
-      },
-      {
-        id: 'mini-events',
-        name: 'Mini Events',
-        image: '/assets/landing1.png',
-        description: 'Compact setup perfect for intimate celebrations and small group activities',
-        features: ['Intimate Setting', 'Flexible Layout', 'Quick Setup']
+        image: '/assets/vace.jpg',
+        description: 'Indulge in curated beach experiences that go beyond ordinary events. From romantic sunset dinners and proposal setups to wellness retreats and photoshoot arrangements, we create bespoke experiences tailored to your vision.',
+        features: ['Curated Experiences', 'Bespoke Design', 'Picture-Perfect Setup']
       }
     ]
   },
@@ -77,17 +77,10 @@ const productCategories = [
       {
         id: 'beach-tables',
         name: 'Beach Tables',
-        image: '/assets/39.jpg',
+        image: '/assets/landing4.png',
         description: 'Sturdy tables perfect for dining and activities on the beach',
         features: ['Weather Resistant', 'Stable Design', 'Easy to Clean']
-      }
-    ]
-  },
-  {
-    id: 'additional-items',
-    title: 'Additional Items',
-    description: 'Enhance your beach experience with our premium accessories',
-    products: [
+      },
       {
         id: 'dining-cutlery',
         name: 'Dining Cutlery',
@@ -119,7 +112,7 @@ const productCategories = [
       {
         id: 'sisal-mats',
         name: 'Sisal Beach Mats',
-        image: '/assets/Sisal Beach Mats.jpeg',
+        image: '/assets/Sisal Beach Marts.jpeg',
         description: 'Natural fiber mats providing comfortable ground coverage',
         features: ['Natural Fiber', 'Sand Resistant', 'Eco-Friendly']
       }
@@ -235,7 +228,7 @@ function App() {
 
   // Statistics and scroll animations
   useEffect(() => {
-    if (currentPage === 'home') {
+    if (currentPage === 'home' || currentPage === 'products') {
       setTimeout(() => {
         // Setup scroll-triggered animations
         const setupScrollAnimations = () => {
@@ -603,8 +596,9 @@ function App() {
                   fontSize: '3.5rem',
                   marginBottom: '2rem',
                   fontWeight: 'bold',
-                  textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
-                  letterSpacing: '1px'
+                  textShadow: '3px 3px 12px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.8), 1px 1px 6px rgba(0,0,0,1)',
+                  letterSpacing: '1px',
+                  WebkitTextStroke: '1px rgba(0,0,0,0.3)'
                 }}>Our Experience in Numbers</h2>
                 
                 <p className="section-subtitle" style={{
@@ -614,8 +608,9 @@ function App() {
                   maxWidth: '900px',
                   margin: '0 auto 3rem auto',
                   lineHeight: '1.7',
-                  textShadow: '1px 1px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)',
-                  fontWeight: '500'
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8), 1px 1px 4px rgba(0,0,0,1)',
+                  fontWeight: '600',
+                  WebkitTextStroke: '0.5px rgba(0,0,0,0.3)'
                 }}>Trusted by hundreds of clients for their special beach events</p>
                 
                 <div className="stats-grid" ref={(el) => {
@@ -642,20 +637,18 @@ function App() {
                       <div className="stat-number counter" 
                            data-target={stat.number.replace(/[^0-9]/g, '')}
                            style={{
-                             color: '#000000',
-                             fontSize: '3.5rem',
+                             color: '#2d5a27',
+                             fontSize: '4rem',
                              fontWeight: '900',
                              marginBottom: '0.5rem',
-                             textShadow: 'none',
-                             letterSpacing: '1px'
+                             letterSpacing: '2px'
                            }}>0</div>
                       <div className="stat-label" style={{
-                        color: '#000000',
-                        fontSize: '1.2rem',
-                        fontWeight: '700',
-                        textShadow: 'none',
+                        color: '#333333',
+                        fontSize: '1.3rem',
+                        fontWeight: '800',
                         textTransform: 'uppercase',
-                        letterSpacing: '0.5px'
+                        letterSpacing: '1px'
                       }}>{stat.label}</div>
                     </div>
                   ))}
@@ -925,13 +918,54 @@ function App() {
 
       case 'about':
         return (
-          <div className="page-content">
-            <section className="about-section">
+          <div className="page-content" style={{ marginTop: 0, paddingTop: 0 }}>
+            {/* About Hero Section */}
+            <section className="about-hero" style={{
+              backgroundImage: 'url(/assets/landing2.jpeg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundAttachment: 'fixed',
+              position: 'relative',
+              height: '60vh',
+              minHeight: '400px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              width: '100vw',
+              marginLeft: 'calc(-50vw + 50%)',
+              marginRight: 'calc(-50vw + 50%)',
+              marginTop: '0',
+              paddingTop: '0',
+              top: '0'
+            }}>
+              <div style={{ 
+                position: 'relative', 
+                zIndex: 2,
+                maxWidth: '800px',
+                margin: '0 auto',
+                padding: '0 2rem'
+              }}>
+                <h1 style={{
+                  color: 'white',
+                  fontSize: '3.5rem',
+                  marginBottom: '1.5rem',
+                  fontWeight: 'bold',
+                  textShadow: '3px 3px 12px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.8)'
+                }}>About EcoFriendly Beach Rentals</h1>
+                <p style={{
+                  color: 'white',
+                  fontSize: '1.3rem',
+                  lineHeight: '1.6',
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
+                  maxWidth: '700px',
+                  margin: '0 auto'
+                }}>Located in Diani Beach, Kenya, we offer sustainable rentals for beach weddings, parties, and events</p>
+              </div>
+            </section>
+            
+            <section className="about-section" style={{ padding: '4rem 0' }}>
               <div className="container">
-                <h2 className="section-title" style={{ textAlign: 'center' }}>About EcoFriendly Beach Rentals</h2>
-                <p className="section-description">
-                  Located in Diani Beach, Kenya, we offer sustainable rentals for beach weddings, parties, and events. Our eco-friendly products ensure minimal environmental impact while providing elegance and comfort.
-                </p>
                 
                 <div className="about-cards-grid" style={{display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '3rem'}}>
                   <div className="about-card" style={{background: 'white', borderRadius: '16px', boxShadow: '0 2px 16px rgba(45,90,39,0.07)', padding: '2rem', minWidth: '260px', maxWidth: '340px', textAlign: 'center'}}>
@@ -954,7 +988,7 @@ function App() {
 
       case 'products':
         return (
-          <div className="page-content">
+          <div className="page-content" style={{ marginTop: 0, paddingTop: 0 }}>
             {/* Products Hero Section */}
             <section className="products-hero" style={{
               backgroundImage: 'url(/assets/landing4.png)',
@@ -962,21 +996,19 @@ function App() {
               backgroundPosition: 'center',
               backgroundAttachment: 'fixed',
               position: 'relative',
-              padding: '8rem 0 6rem 0',
+              height: '100vh',
+              minHeight: '100vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               textAlign: 'center',
               width: '100vw',
               marginLeft: 'calc(-50vw + 50%)',
-              marginRight: 'calc(-50vw + 50%)'
+              marginRight: 'calc(-50vw + 50%)',
+              marginTop: '0',
+              paddingTop: '0',
+              top: '0'
             }}>
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: 'rgba(45, 90, 39, 0.7)',
-                zIndex: 1
-              }}></div>
               
               <div style={{ 
                 position: 'relative', 
@@ -985,26 +1017,149 @@ function App() {
                 margin: '0 auto',
                 padding: '0 2rem'
               }}>
-                <h1 style={{
+                <h1 className="hero-title-animate" style={{
                   color: 'white',
-                  fontSize: '4rem',
-                  marginBottom: '1rem',
+                  fontSize: '5rem',
+                  marginBottom: '2rem',
                   fontWeight: 'bold',
-                  textShadow: '2px 2px 8px rgba(0,0,0,0.8)'
+                  textShadow: '3px 3px 12px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.8)',
+                  opacity: 0,
+                  transform: 'translateY(50px)',
+                  animation: 'fadeInUp 1.5s ease-out 0.5s forwards'
                 }}>Our Products & Services</h1>
-                <p style={{
+                <p className="hero-subtitle-animate" style={{
                   color: 'white',
-                  fontSize: '1.4rem',
-                  maxWidth: '800px',
+                  fontSize: '1.6rem',
+                  maxWidth: '900px',
                   margin: '0 auto',
-                  lineHeight: '1.7',
-                  textShadow: '1px 1px 4px rgba(0,0,0,0.8)'
+                  lineHeight: '1.8',
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)',
+                  fontWeight: '500',
+                  opacity: 0,
+                  transform: 'translateY(50px)',
+                  animation: 'fadeInUp 1.5s ease-out 1s forwards'
                 }}>Sustainable beach event rentals for every occasion in Diani Beach, Kenya</p>
+              </div>
+              
+              {/* Animated scroll down button */}
+              <div className="scroll-down-button" style={{
+                position: 'absolute',
+                bottom: '40px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                cursor: 'pointer',
+                zIndex: 10,
+                animation: 'bounce 2s infinite',
+                opacity: 0,
+                animationDelay: '2s',
+                animationFillMode: 'forwards'
+              }} onClick={() => {
+                const nextSection = document.querySelector('.products-container');
+                if (nextSection) {
+                  nextSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}>
+                <div style={{
+                  width: '50px',
+                  height: '50px',
+                  border: '3px solid rgba(255, 255, 255, 0.9)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'all 0.3s ease'
+                }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.9)" strokeWidth="3">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                  </svg>
+                </div>
+                <span style={{
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  fontSize: '14px',
+                  marginTop: '12px',
+                  fontWeight: '600',
+                  letterSpacing: '2px'
+                }}>SCROLL</span>
               </div>
             </section>
 
             {/* Products Categories */}
             <section className="products-container" style={{ padding: '6rem 0' }}>
+              <style>{`
+                @media (max-width: 768px) {
+                  .package-item {
+                    flex-direction: column !important;
+                    text-align: center;
+                  }
+                  .package-item > div:first-child {
+                    height: 300px !important;
+                    border-radius: 24px 24px 0 0 !important;
+                  }
+                  .package-item > div:last-child {
+                    padding: 2rem !important;
+                  }
+                }
+                
+                /* Professional scroll animations for packages */
+                .scroll-animate {
+                  opacity: 0;
+                  transform: translateY(50px);
+                  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                }
+                
+                .scroll-animate.animate-in {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+                
+                /* Package-specific animations */
+                .package-item.scroll-animate {
+                  opacity: 0;
+                  transform: translateY(80px) scale(0.95);
+                  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                }
+                
+                .package-item.scroll-animate.animate-in {
+                  opacity: 1;
+                  transform: translateY(0) scale(1);
+                }
+                
+                /* Staggered animation for package elements */
+                .package-content > * {
+                  opacity: 0;
+                  transform: translateX(30px);
+                  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                  transition-delay: 0.3s;
+                }
+                
+                .package-item.animate-in .package-content > * {
+                  opacity: 1;
+                  transform: translateX(0);
+                }
+                
+                .package-content > *:nth-child(1) { transition-delay: 0.4s; }
+                .package-content > *:nth-child(2) { transition-delay: 0.5s; }
+                .package-content > *:nth-child(3) { transition-delay: 0.6s; }
+                .package-content > *:nth-child(4) { transition-delay: 0.7s; }
+                
+                /* Image animation */
+                .package-image {
+                  opacity: 0;
+                  transform: scale(1.1);
+                  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                  transition-delay: 0.2s;
+                }
+                
+                .package-item.animate-in .package-image {
+                  opacity: 1;
+                  transform: scale(1);
+                }
+              `}</style>
               <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
                 {productCategories.map((category, categoryIndex) => (
                   <div key={category.id} className="product-category" style={{ marginBottom: '6rem' }}>
@@ -1022,13 +1177,176 @@ function App() {
                       }}>{category.description}</p>
                     </div>
                     
-                    <div className="products-grid" style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                      gap: '2rem',
-                      marginBottom: '2rem'
-                    }}>
-                      {category.products.map((product, productIndex) => (
+                    {/* Special vertical layout for "Our Packages" */}
+                    {category.id === 'our-packages' ? (
+                      <div className="packages-vertical-layout">
+                        {category.products.map((product, productIndex) => (
+                          <div 
+                            key={product.id}
+                            className="package-item scroll-animate"
+                            data-delay={productIndex * 300}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '4rem',
+                              marginBottom: '6rem',
+                              minHeight: '400px',
+                              flexDirection: productIndex % 2 === 0 ? 'row' : 'row-reverse',
+                              background: 'white',
+                              borderRadius: '24px',
+                              boxShadow: '0 12px 40px rgba(0,0,0,0.08)',
+                              overflow: 'hidden',
+                              cursor: 'pointer',
+                              transition: 'all 0.3s ease'
+                            }}
+                            onClick={() => viewProduct(product.id)}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.transform = 'translateY(-8px)';
+                              e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.15)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.transform = 'translateY(0)';
+                              e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.08)';
+                            }}
+                          >
+                            {/* Image Section */}
+                            <div className="package-image" style={{
+                              flex: '1',
+                              height: '400px',
+                              position: 'relative',
+                              overflow: 'hidden',
+                              borderRadius: productIndex % 2 === 0 ? '24px 0 0 24px' : '0 24px 24px 0'
+                            }}>
+                              <img 
+                                src={product.image} 
+                                alt={product.name}
+                                style={{
+                                  width: '100%',
+                                  height: '100%',
+                                  objectFit: 'contain',
+                                  objectPosition: 'center',
+                                  transition: 'transform 0.3s ease'
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.target.style.transform = 'scale(1.05)';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.target.style.transform = 'scale(1)';
+                                }}
+                              />
+                              <div style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                background: 'linear-gradient(45deg, rgba(45,90,39,0.1), transparent)',
+                                opacity: 0,
+                                transition: 'opacity 0.3s ease'
+                              }} className="image-overlay"></div>
+                            </div>
+
+                            {/* Content Section */}
+                            <div className="package-content" style={{
+                              flex: '1',
+                              padding: '3rem',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              justifyContent: 'center'
+                            }}>
+                              <h3 style={{
+                                fontSize: '2.5rem',
+                                color: '#2d5a27',
+                                marginBottom: '1.5rem',
+                                fontWeight: 'bold'
+                              }}>{product.name}</h3>
+                              
+                              <p style={{
+                                color: '#666',
+                                lineHeight: '1.8',
+                                marginBottom: '2rem',
+                                fontSize: '1.1rem'
+                              }}>{product.description}</p>
+                              
+                              <div className="product-features" style={{ 
+                                marginBottom: '2.5rem',
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                gap: '0.5rem'
+                              }}>
+                                {product.features.map((feature, featureIndex) => (
+                                  <span 
+                                    key={featureIndex}
+                                    style={{
+                                      display: 'inline-block',
+                                      background: '#f0f8f0',
+                                      color: '#2d5a27',
+                                      padding: '0.6rem 1.2rem',
+                                      borderRadius: '25px',
+                                      fontSize: '0.95rem',
+                                      fontWeight: '500',
+                                      border: '2px solid transparent',
+                                      transition: 'all 0.3s ease'
+                                    }}
+                                  >{feature}</span>
+                                ))}
+                              </div>
+                              
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  inquireWhatsApp(product.name);
+                                }}
+                                style={{
+                                  background: '#2d5a27',
+                                  color: 'white',
+                                  border: 'none',
+                                  padding: '1rem 2rem',
+                                  borderRadius: '50px',
+                                  fontSize: '1.1rem',
+                                  fontWeight: 'bold',
+                                  cursor: 'pointer',
+                                  transition: 'all 0.3s ease',
+                                  alignSelf: 'flex-start',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: '0.5rem'
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.target.style.background = '#1a3a17';
+                                  e.target.style.transform = 'translateY(-2px)';
+                                  e.target.style.boxShadow = '0 8px 25px rgba(45,90,39,0.3)';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.target.style.background = '#2d5a27';
+                                  e.target.style.transform = 'translateY(0)';
+                                  e.target.style.boxShadow = 'none';
+                                }}
+                              >
+                                <img 
+                                  src="/assets/whatsapp.png" 
+                                  alt="WhatsApp" 
+                                  style={{ 
+                                    width: '20px', 
+                                    height: '20px',
+                                    filter: 'brightness(0) invert(1)'
+                                  }}
+                                />
+                                Inquire Now
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      /* Regular grid layout for other categories */
+                      <div className="products-grid" style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+                        gap: '2rem',
+                        marginBottom: '2rem'
+                      }}>
+                        {category.products.map((product, productIndex) => (
                         <div 
                           key={product.id} 
                           className="product-card scroll-animate" 
@@ -1101,8 +1419,14 @@ function App() {
                             }}>{product.name}</h3>
                             <p style={{
                               color: '#666',
-                              lineHeight: '1.6',
-                              marginBottom: '1.5rem'
+                              lineHeight: '1.8',
+                              marginBottom: '1.5rem',
+                              fontSize: '1rem',
+                              textAlign: 'left',
+                              maxWidth: '100%',
+                              overflow: 'visible',
+                              whiteSpace: 'normal',
+                              wordWrap: 'break-word'
                             }}>{product.description}</p>
                             
                             <div className="product-features" style={{ marginBottom: '2rem' }}>
@@ -1125,124 +1449,158 @@ function App() {
                                 </span>
                               ))}
                             </div>
-                            
-                            <button 
-                              className="inquire-btn" 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                inquireWhatsApp(product.name);
-                              }}
-                              style={{
-                                background: '#2d5a27',
-                                color: 'white',
-                                border: 'none',
-                                padding: '1rem 2rem',
-                                borderRadius: '50px',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
-                                cursor: 'pointer',
-                                transition: 'all 0.3s ease',
-                                width: '100%'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.target.style.background = '#1e3d1a';
-                                e.target.style.transform = 'translateY(-2px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.target.style.background = '#2d5a27';
-                                e.target.style.transform = 'translateY(0)';
-                              }}
-                            >
-                              Inquire Now
-                            </button>
                           </div>
                         </div>
                       ))}
                     </div>
+                    )}
                   </div>
                 ))}
 
                 {/* Call to Action Section */}
-                <div className="cta-section" style={{
-                  background: 'linear-gradient(135deg, #2d5a27 0%, #3a7233 100%)',
-                  borderRadius: '24px',
-                  padding: '4rem 2rem',
+                <section className="cta-section" style={{
+                  backgroundImage: 'url(/assets/landing1.png)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundAttachment: 'fixed',
+                  position: 'relative',
+                  padding: '8rem 0',
                   textAlign: 'center',
-                  color: 'white',
-                  boxShadow: '0 12px 40px rgba(45, 90, 39, 0.2)'
+                  width: '100vw',
+                  margin: '0',
+                  marginLeft: 'calc(-50vw + 50%)',
+                  marginRight: 'calc(-50vw + 50%)',
+                  marginTop: '4rem'
                 }}>
-                  <h2 style={{
-                    fontSize: '2.5rem',
-                    marginBottom: '1rem',
-                    fontWeight: 'bold'
-                  }}>Ready to Plan Your Beach Event?</h2>
-                  <p style={{
-                    fontSize: '1.2rem',
-                    marginBottom: '2rem',
-                    maxWidth: '600px',
-                    margin: '0 auto 2rem auto',
-                    lineHeight: '1.6'
-                  }}>Contact us to discuss your requirements and get a customized quote for your perfect beach setup</p>
+                  {/* Removed overlay for transparent background */}
                   
-                  <div className="cta-buttons" style={{
-                    display: 'flex',
-                    gap: '1rem',
-                    justifyContent: 'center',
-                    flexWrap: 'wrap'
+                  <div style={{ 
+                    position: 'relative', 
+                    zIndex: 2,
+                    width: '100%',
+                    maxWidth: 'none',
+                    padding: '0 2rem'
                   }}>
-                    <button
-                      onClick={() => window.open('https://wa.me/254797185854?text=Hello%20EcoFriendly%20Beach%20Rentals!%20I\'d%20like%20to%20discuss%20my%20beach%20event%20requirements.', '_blank')}
-                      style={{
-                        background: 'white',
-                        color: '#2d5a27',
-                        border: 'none',
-                        padding: '1rem 2rem',
-                        borderRadius: '50px',
-                        fontSize: '1.1rem',
-                        fontWeight: 'bold',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.transform = 'translateY(-2px)';
-                        e.target.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.transform = 'translateY(0)';
-                        e.target.style.boxShadow = 'none';
-                      }}
-                    >
-                      💬 Chat on WhatsApp
-                    </button>
-                    <button
-                      onClick={() => setCurrentPage('contact')}
-                      style={{
-                        background: 'transparent',
-                        color: 'white',
-                        border: '2px solid white',
-                        padding: '1rem 2rem',
-                        borderRadius: '50px',
-                        fontSize: '1.1rem',
-                        fontWeight: 'bold',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = 'white';
-                        e.target.style.color = '#2d5a27';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'transparent';
-                        e.target.style.color = 'white';
-                      }}
-                    >
-                      Get Quote
-                    </button>
+                    <h2 className="section-title scroll-animate" data-delay="200" style={{ 
+                      textAlign: 'center',
+                      color: 'white',
+                      fontSize: '3.5rem',
+                      marginBottom: '2rem',
+                      fontWeight: 'bold',
+                      textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
+                      letterSpacing: '1px'
+                    }}>
+                      Ready to Plan Your Beach Event?
+                    </h2>
+                    
+                    <p className="scroll-animate" data-delay="400" style={{
+                      color: 'white',
+                      fontSize: '1.4rem',
+                      marginBottom: '3rem',
+                      maxWidth: '900px',
+                      margin: '0 auto 3rem auto',
+                      lineHeight: '1.7',
+                      textShadow: '1px 1px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)',
+                      fontWeight: '500'
+                    }}>
+                      Contact us to discuss your requirements and get a customized quote for your perfect beach setup
+                    </p>
+                    
+                    <div className="cta-buttons scroll-animate" data-delay="600" style={{
+                      display: 'flex',
+                      gap: '2rem',
+                      justifyContent: 'center',
+                      flexWrap: 'wrap'
+                    }}>
+                      <a 
+                        href="https://wa.me/254797185854?text=Hello%20EcoFriendly%20Beach%20Rentals!%20I'd%20like%20to%20discuss%20my%20beach%20event%20requirements." 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="whatsapp-btn"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '0.8rem',
+                          backgroundColor: 'transparent',
+                          color: 'white',
+                          border: '3px solid white',
+                          padding: '1.2rem 2.5rem',
+                          borderRadius: '50px',
+                          textDecoration: 'none',
+                          fontSize: '1.1rem',
+                          fontWeight: 'bold',
+                          transition: 'all 0.3s ease',
+                          textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+                          boxShadow: '0 4px 15px rgba(255,255,255,0.2)'
+                        }}
+                        onMouseOver={(e) => {
+                          e.target.style.backgroundColor = 'white';
+                          e.target.style.color = '#25d366';
+                          e.target.style.transform = 'translateY(-3px)';
+                          e.target.style.textShadow = 'none';
+                          e.target.style.boxShadow = '0 8px 25px rgba(255,255,255,0.4)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.target.style.backgroundColor = 'transparent';
+                          e.target.style.color = 'white';
+                          e.target.style.transform = 'translateY(0)';
+                          e.target.style.textShadow = '1px 1px 3px rgba(0,0,0,0.5)';
+                          e.target.style.boxShadow = '0 4px 15px rgba(255,255,255,0.2)';
+                        }}
+                      >
+                        <img 
+                          src="/assets/whatsapp.png" 
+                          alt="WhatsApp" 
+                          style={{ 
+                            width: '24px', 
+                            height: '24px',
+                            filter: 'none'
+                          }}
+                          onMouseOver={(e) => {
+                            e.target.style.filter = 'brightness(0) invert(1)';
+                          }}
+                          onMouseOut={(e) => {
+                            e.target.style.filter = 'none';
+                          }}
+                        />
+                        Chat on WhatsApp
+                      </a>
+                      
+                      <button
+                        onClick={() => setCurrentPage('contact')}
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.1)',
+                          color: 'white',
+                          border: '3px solid white',
+                          padding: '1.2rem 2.5rem',
+                          borderRadius: '50px',
+                          fontSize: '1.1rem',
+                          fontWeight: 'bold',
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          textShadow: '1px 1px 3px rgba(0,0,0,0.5)',
+                          boxShadow: '0 4px 15px rgba(255,255,255,0.2)'
+                        }}
+                        onMouseOver={(e) => {
+                          e.target.style.backgroundColor = 'white';
+                          e.target.style.color = '#2d5a27';
+                          e.target.style.transform = 'translateY(-3px)';
+                          e.target.style.textShadow = 'none';
+                          e.target.style.boxShadow = '0 8px 25px rgba(255,255,255,0.4)';
+                        }}
+                        onMouseOut={(e) => {
+                          e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                          e.target.style.color = 'white';
+                          e.target.style.transform = 'translateY(0)';
+                          e.target.style.textShadow = '1px 1px 3px rgba(0,0,0,0.5)';
+                          e.target.style.boxShadow = '0 4px 15px rgba(255,255,255,0.2)';
+                        }}
+                      >
+                        📧 Get Quote
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </section>
               </div>
             </section>
           </div>
@@ -1250,14 +1608,55 @@ function App() {
 
       case 'contact':
         return (
-          <div className="page-content">
-            <section className="contact-section">
-              <h2 className="section-title" style={{ textAlign: 'center' }}>Contact Us</h2>
-              <p className="section-description">
-                Ready to plan your perfect beach event? Get in touch with us today!
-              </p>
-              
-              <div className="contact-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem', marginTop: '3rem' }}>
+          <div className="page-content" style={{ marginTop: 0, paddingTop: 0 }}>
+            {/* Contact Hero Section */}
+            <section className="contact-hero" style={{
+              backgroundImage: 'url(/assets/landing1.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundAttachment: 'fixed',
+              position: 'relative',
+              height: '60vh',
+              minHeight: '400px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              width: '100vw',
+              marginLeft: 'calc(-50vw + 50%)',
+              marginRight: 'calc(-50vw + 50%)',
+              marginTop: '0',
+              paddingTop: '0',
+              top: '0'
+            }}>
+              <div style={{ 
+                position: 'relative', 
+                zIndex: 2,
+                maxWidth: '800px',
+                margin: '0 auto',
+                padding: '0 2rem'
+              }}>
+                <h1 style={{
+                  color: 'white',
+                  fontSize: '3.5rem',
+                  marginBottom: '1.5rem',
+                  fontWeight: 'bold',
+                  textShadow: '3px 3px 12px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.8)'
+                }}>Contact Us</h1>
+                <p style={{
+                  color: 'white',
+                  fontSize: '1.3rem',
+                  lineHeight: '1.6',
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
+                  maxWidth: '700px',
+                  margin: '0 auto'
+                }}>Ready to plan your perfect beach event? Get in touch with us today!</p>
+              </div>
+            </section>
+            
+            <section className="contact-section" style={{ padding: '4rem 0' }}>
+              <div className="container">
+                <div className="contact-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem', marginTop: '3rem' }}>
                 <div className="contact-info">
                   <h3>Get in Touch</h3>
                   <div className="contact-details" style={{ marginTop: '1.5rem' }}>
@@ -1357,6 +1756,7 @@ function App() {
                   </form>
                 </div>
               </div>
+              </div>
             </section>
           </div>
         );
@@ -1367,20 +1767,42 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className="app" data-page={currentPage}>
       <header className="header" style={{
-        position: 'absolute',
+        position: currentPage === 'products' ? 'absolute' : 'absolute',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 1000,
         background: 'transparent',
+        backgroundColor: 'transparent',
         border: 'none',
-        padding: '0.2rem 0'
+        padding: '0.2rem 0',
+        boxShadow: 'none',
+        backdropFilter: 'none',
+        ...(currentPage === 'products' && {
+          position: 'absolute',
+          transform: 'none',
+          willChange: 'auto'
+        })
       }}>
-        <div className="container">
-          <div className="header-content">
-            <div className="logo" style={{ color: 'white', textShadow: '2px 2px 4px rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div className="container" style={{
+          background: 'transparent',
+          backgroundColor: 'transparent'
+        }}>
+          <div className="header-content" style={{
+            background: 'transparent',
+            backgroundColor: 'transparent'
+          }}>
+            <div className="logo" style={{ 
+              color: 'white', 
+              textShadow: '2px 2px 4px rgba(0,0,0,0.3)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '1rem',
+              background: 'transparent',
+              backgroundColor: 'transparent'
+            }}>
               <img 
                 src="/assets/logo.png" 
                 alt="EcoFriendly Beach Rentals Logo" 
@@ -1415,12 +1837,6 @@ function App() {
                     transition: 'all 0.3s ease',
                     fontWeight: '600',
                     cursor: 'pointer'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.background = 'transparent';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.background = 'transparent';
                   }}
                 >
                   <span className="nav-icon">{item.icon}</span>
@@ -1527,7 +1943,7 @@ function App() {
               }}>SCROLL</span>
             </div>
           </section>
-        ) : (
+        ) : currentPage !== 'products' ? (
           <section className="hero" style={{backgroundImage: `url(${heroImages[currentPage]})`}}>
             <div className="hero-overlay">
               <div className="container">
@@ -1539,7 +1955,7 @@ function App() {
               </div>
             </div>
           </section>
-        )}
+        ) : null}
 
         <div className="container">
           {renderPageContent()}

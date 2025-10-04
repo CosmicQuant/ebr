@@ -193,18 +193,95 @@ body {
   padding: 0 2rem;
 }
 
-/* Header with Glass Effect */
+/* Header - completely non-sticky */
 .header {
-  background: rgba(45, 90, 39, 0.95);
-  backdrop-filter: none;
-  color: white;
-  padding: 1rem 0;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  animation: slideDown 0.8s ease-out;
+  position: absolute !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  color: white !important;
+  padding: 0.2rem 0 !important;
+  box-shadow: none !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  border: none !important;
+  border-bottom: none !important;
+  animation: none !important;
+}
+
+/* Ensure header is NEVER sticky */
+header {
+  position: absolute !important;
+}
+
+header.header {
+  position: absolute !important;
+}
+
+.app .header {
+  position: absolute !important;
+}
+
+.app header {
+  position: absolute !important;
+}
+
+/* All pages container override - completely transparent */
+.container {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* All pages header content override - completely transparent */
+.header-content {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* All pages logo override - completely transparent */
+.logo {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.logo img {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.logo h1 {
+  background: transparent !important;
+  background-color: transparent !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: white !important;
+  background-clip: unset !important;
+  animation: none !important;
+}
+
+/* All pages navigation override - completely transparent */
+.nav {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Products page content override - start from top */
+.app[data-page="products"] .page-content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.app[data-page="products"] .products-hero {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  top: 0 !important;
+}
+
+/* General navigation button hover effects */
+.nav button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  transform: none !important;
 }
 
 @keyframes slideDown {
@@ -943,17 +1020,14 @@ body {
 .stat-number {
   font-size: 3.2rem;
   font-weight: 900;
-  color: var(--primary-green);
+  color: #2d5a27;
   margin-bottom: 0.75rem;
-  background: linear-gradient(45deg, var(--primary-green), var(--accent-green));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   line-height: 1;
   display: block;
   text-align: center;
   min-height: 3.5rem;
   white-space: nowrap;
+  text-shadow: none;
 }
 
 .stat-number.counter {
@@ -973,12 +1047,13 @@ body {
 
 .stat-label {
   font-size: 1.1rem;
-  color: var(--text-medium);
+  color: #333;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   position: relative;
   z-index: 2;
+  text-shadow: none;
 }
 
 /* Contact Form */
@@ -1432,4 +1507,35 @@ body {
   .nav-item.active {
     border: 2px solid currentColor;
   }
+}
+
+/* Hero animations for products page */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Scroll down button hover effect */
+.scroll-down-button:hover div {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 1);
 }
