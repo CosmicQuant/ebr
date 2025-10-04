@@ -25,6 +25,108 @@ const impactStats = [
   { number: '50+', label: 'Beach Setups', icon: '🏖️' }
 ];
 
+// Products data
+const productCategories = [
+  {
+    id: 'event-packages',
+    title: 'Event Packages',
+    description: 'Complete setup packages for your perfect beach event',
+    products: [
+      {
+        id: 'experiences',
+        name: 'Experiences',
+        image: '/assets/landing3.png',
+        description: 'Unique beach experiences and intimate gatherings with special atmosphere elements',
+        features: ['Unique Experiences', 'Ambient Lighting', 'Decorative Setup']
+      },
+      {
+        id: 'gatherings',
+        name: 'Gatherings',
+        image: '/assets/landing2.jpeg',
+        description: 'Ideal for social events and celebrations with dining setup and entertainment area',
+        features: ['Dining Setup', 'Entertainment Area', 'Social Seating']
+      },
+      {
+        id: 'mini-events',
+        name: 'Mini Events',
+        image: '/assets/landing1.png',
+        description: 'Compact setup perfect for intimate celebrations and small group activities',
+        features: ['Intimate Setting', 'Flexible Layout', 'Quick Setup']
+      }
+    ]
+  },
+  {
+    id: 'individual-items',
+    title: 'Individual Items',
+    description: 'Rent individual items to customize your beach experience',
+    products: [
+      {
+        id: 'beach-shades',
+        name: 'Beach Shades',
+        image: '/assets/38.jpg',
+        description: 'Durable and stylish umbrellas providing excellent sun protection',
+        features: ['UV Protection', 'Wind Resistant', 'Easy Setup']
+      },
+      {
+        id: 'canvas-beach-chairs',
+        name: 'Canvas Beach Chairs',
+        image: '/assets/Canvas Beach Chairs.jpeg',
+        description: 'Comfortable and portable canvas chairs perfect for beach relaxation',
+        features: ['Lightweight', 'Durable Canvas', 'Portable']
+      },
+      {
+        id: 'beach-tables',
+        name: 'Beach Tables',
+        image: '/assets/39.jpg',
+        description: 'Sturdy tables perfect for dining and activities on the beach',
+        features: ['Weather Resistant', 'Stable Design', 'Easy to Clean']
+      }
+    ]
+  },
+  {
+    id: 'additional-items',
+    title: 'Additional Items',
+    description: 'Enhance your beach experience with our premium accessories',
+    products: [
+      {
+        id: 'dining-cutlery',
+        name: 'Dining Cutlery',
+        image: '/assets/Dining Cutlery.jpeg',
+        description: 'Complete cutlery sets for your beach dining experience',
+        features: ['Complete Set', 'Stainless Steel', 'Reusable']
+      },
+      {
+        id: 'flower-vases',
+        name: 'Decorative Flower Vases',
+        image: '/assets/Flower Vases.jpeg',
+        description: 'Beautiful vases to add elegance to your beach setup',
+        features: ['Elegant Design', 'Weather Proof', 'Various Sizes']
+      },
+      {
+        id: 'water-resistant-pillows',
+        name: 'Water Resistant Pillows',
+        image: '/assets/Water Resistant Pillows.jpeg',
+        description: 'Comfortable pillows designed for beach and outdoor use',
+        features: ['Water Resistant', 'Quick Dry', 'Comfortable']
+      },
+      {
+        id: 'glow-lights',
+        name: 'Glow in Dark Lights',
+        image: '/assets/Glow in Dark Light.jpeg',
+        description: 'Atmospheric lighting perfect for evening beach events',
+        features: ['Energy Efficient', 'Long Lasting', 'Ambient Lighting']
+      },
+      {
+        id: 'sisal-mats',
+        name: 'Sisal Beach Mats',
+        image: '/assets/Sisal Beach Mats.jpeg',
+        description: 'Natural fiber mats providing comfortable ground coverage',
+        features: ['Natural Fiber', 'Sand Resistant', 'Eco-Friendly']
+      }
+    ]
+  }
+];
+
 function App() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
@@ -33,6 +135,23 @@ function App() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [testimonialFading, setTestimonialFading] = useState(false);
+
+  // WhatsApp inquiry function
+  const inquireWhatsApp = (productName) => {
+    const message = `Hello EcoFriendly Beach Rentals! I'm interested in the ${productName}. Could you please provide more details and pricing?`;
+    const whatsappUrl = `https://wa.me/254797185854?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  // View product details function (placeholder for now)
+  const viewProduct = (productId) => {
+    // For now, just inquire about the product
+    // Later we'll implement product details page
+    const product = productCategories.flatMap(cat => cat.products).find(p => p.id === productId);
+    if (product) {
+      inquireWhatsApp(product.name);
+    }
+  };
 
   // Carousel images and subtitles for homepage hero
   const carouselImages = [
@@ -47,7 +166,7 @@ function App() {
       text: 'Beautiful coastal arrangements for memorable occasions.'
     },
     {
-      url: '/assets/landing3.jpeg',
+      url: '/assets/landing33.png',
       subtitle: 'BEACH SETUP THREE',
       text: 'Stunning beachside configurations for special events.'
     },
@@ -188,6 +307,31 @@ function App() {
           observer.observe(statsSection);
         }
       }, 300);
+    } else if (currentPage === 'products') {
+      // Setup scroll animations for products page
+      setTimeout(() => {
+        const scrollElements = document.querySelectorAll('.scroll-animate');
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const delay = entry.target.dataset.delay || 0;
+              setTimeout(() => {
+                entry.target.classList.add('animate-in');
+              }, parseInt(delay));
+            } else {
+              entry.target.classList.remove('animate-in');
+            }
+          });
+        }, {
+          threshold: 0.3,
+          rootMargin: '0px 0px -50px 0px'
+        });
+        
+        scrollElements.forEach(element => {
+          observer.observe(element);
+        });
+      }, 300);
     }
   }, [currentPage]);
 
@@ -210,7 +354,7 @@ function App() {
 
             <section className="features-vertical">
               <div className="container" style={{ textAlign: 'center' }}>
-                <h2 className="section-title scroll-animate" data-delay="200" style={{ textAlign: 'center', marginBottom: '1rem' }}>Our Signature Beach Services</h2>
+                <h2 className="section-title scroll-animate" data-delay="200" style={{ textAlign: 'center', marginBottom: '1rem' }}>Our Signature Services</h2>
                 <p className="section-subtitle scroll-animate" data-delay="400" style={{ textAlign: 'center', marginBottom: '3rem' }}>Discover our three core offerings that make every beach event extraordinary</p>
               </div>
               
@@ -811,39 +955,292 @@ function App() {
       case 'products':
         return (
           <div className="page-content">
-            <section className="products-section">
-              <h2 className="section-title" style={{ textAlign: 'center' }}>Our Eco-Friendly Rentals for Events</h2>
-              <p className="section-description">
-                Choose from our range of sustainable beach event packages, each designed to create magical moments while respecting the environment.
-              </p>
+            {/* Products Hero Section */}
+            <section className="products-hero" style={{
+              backgroundImage: 'url(/assets/landing4.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundAttachment: 'fixed',
+              position: 'relative',
+              padding: '8rem 0 6rem 0',
+              textAlign: 'center',
+              width: '100vw',
+              marginLeft: 'calc(-50vw + 50%)',
+              marginRight: 'calc(-50vw + 50%)'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(45, 90, 39, 0.7)',
+                zIndex: 1
+              }}></div>
               
-              <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '2rem' }}>
-                <div className="product-item" style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', overflow: 'hidden', cursor: 'pointer' }}>
-                  <img src="/assets/Landing1_compressed.jpg" alt="Beach Wedding Package" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                  <div style={{ padding: '1.5rem' }}>
-                    <h3>Beach Weddings</h3>
-                    <p>Elegant wedding setups for your perfect seaside ceremony. Complete romantic arrangements with decorations, seating, and magical ambiance.</p>
+              <div style={{ 
+                position: 'relative', 
+                zIndex: 2,
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '0 2rem'
+              }}>
+                <h1 style={{
+                  color: 'white',
+                  fontSize: '4rem',
+                  marginBottom: '1rem',
+                  fontWeight: 'bold',
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.8)'
+                }}>Our Products & Services</h1>
+                <p style={{
+                  color: 'white',
+                  fontSize: '1.4rem',
+                  maxWidth: '800px',
+                  margin: '0 auto',
+                  lineHeight: '1.7',
+                  textShadow: '1px 1px 4px rgba(0,0,0,0.8)'
+                }}>Sustainable beach event rentals for every occasion in Diani Beach, Kenya</p>
+              </div>
+            </section>
+
+            {/* Products Categories */}
+            <section className="products-container" style={{ padding: '6rem 0' }}>
+              <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
+                {productCategories.map((category, categoryIndex) => (
+                  <div key={category.id} className="product-category" style={{ marginBottom: '6rem' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                      <h2 className="section-title scroll-animate" data-delay={categoryIndex * 200} style={{
+                        fontSize: '3rem',
+                        color: '#2d5a27',
+                        marginBottom: '1rem'
+                      }}>{category.title}</h2>
+                      <p className="section-subtitle scroll-animate" data-delay={categoryIndex * 200 + 200} style={{
+                        fontSize: '1.2rem',
+                        color: '#666',
+                        maxWidth: '600px',
+                        margin: '0 auto'
+                      }}>{category.description}</p>
+                    </div>
+                    
+                    <div className="products-grid" style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+                      gap: '2rem',
+                      marginBottom: '2rem'
+                    }}>
+                      {category.products.map((product, productIndex) => (
+                        <div 
+                          key={product.id} 
+                          className="product-card scroll-animate" 
+                          data-delay={categoryIndex * 200 + productIndex * 100}
+                          onClick={() => viewProduct(product.id)}
+                          style={{
+                            background: 'white',
+                            borderRadius: '20px',
+                            boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                            overflow: 'hidden',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            position: 'relative'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.target.style.transform = 'translateY(-8px)';
+                            e.target.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.transform = 'translateY(0)';
+                            e.target.style.boxShadow = '0 8px 32px rgba(0,0,0,0.1)';
+                          }}
+                        >
+                          <div className="product-image" style={{ position: 'relative', overflow: 'hidden' }}>
+                            <img 
+                              src={product.image} 
+                              alt={product.name} 
+                              style={{ 
+                                width: '100%', 
+                                height: '250px', 
+                                objectFit: 'cover',
+                                transition: 'transform 0.3s ease'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.target.style.transform = 'scale(1.05)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.target.style.transform = 'scale(1)';
+                              }}
+                            />
+                            <div className="product-overlay" style={{
+                              position: 'absolute',
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              bottom: 0,
+                              background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7))',
+                              display: 'flex',
+                              alignItems: 'flex-end',
+                              justifyContent: 'center',
+                              padding: '1rem',
+                              opacity: 0,
+                              transition: 'opacity 0.3s ease'
+                            }}>
+                              <span style={{
+                                color: 'white',
+                                fontSize: '1.1rem',
+                                fontWeight: 'bold',
+                                textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
+                              }}>View Details</span>
+                            </div>
+                          </div>
+                          
+                          <div className="product-info" style={{ padding: '2rem' }}>
+                            <h3 style={{
+                              fontSize: '1.5rem',
+                              color: '#2d5a27',
+                              marginBottom: '1rem',
+                              fontWeight: 'bold'
+                            }}>{product.name}</h3>
+                            <p style={{
+                              color: '#666',
+                              lineHeight: '1.6',
+                              marginBottom: '1.5rem'
+                            }}>{product.description}</p>
+                            
+                            <div className="product-features" style={{ marginBottom: '2rem' }}>
+                              {product.features.map((feature, featureIndex) => (
+                                <span 
+                                  key={featureIndex}
+                                  className="feature" 
+                                  style={{
+                                    display: 'inline-block',
+                                    background: '#f0f8f0',
+                                    color: '#2d5a27',
+                                    padding: '0.5rem 1rem',
+                                    borderRadius: '20px',
+                                    fontSize: '0.9rem',
+                                    margin: '0.25rem',
+                                    border: '1px solid #e8f5e8'
+                                  }}
+                                >
+                                  {feature}
+                                </span>
+                              ))}
+                            </div>
+                            
+                            <button 
+                              className="inquire-btn" 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                inquireWhatsApp(product.name);
+                              }}
+                              style={{
+                                background: '#2d5a27',
+                                color: 'white',
+                                border: 'none',
+                                padding: '1rem 2rem',
+                                borderRadius: '50px',
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
+                                cursor: 'pointer',
+                                transition: 'all 0.3s ease',
+                                width: '100%'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.target.style.background = '#1e3d1a';
+                                e.target.style.transform = 'translateY(-2px)';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.target.style.background = '#2d5a27';
+                                e.target.style.transform = 'translateY(0)';
+                              }}
+                            >
+                              Inquire Now
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div className="product-item" style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', overflow: 'hidden', cursor: 'pointer' }}>
-                  <img src="/assets/Landing2_compressed.jpg" alt="Gatherings Package" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                  <div style={{ padding: '1.5rem' }}>
-                    <h3>Gatherings</h3>
-                    <p>Ideal for medium-sized social events. Complete setup with seating arrangements, dining area, and entertainment space for memorable beach gatherings.</p>
-                  </div>
-                </div>
-                <div className="product-item" style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', overflow: 'hidden', cursor: 'pointer' }}>
-                  <img src="/assets/landing4.jpeg" alt="Beach Experience" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                  <div style={{ padding: '1.5rem' }}>
-                    <h3>Beach Experience</h3>
-                    <p>Enjoy our signature beach setup for unforgettable events and gatherings, perfect for any special occasion.</p>
-                  </div>
-                </div>
-                <div className="product-item" style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', overflow: 'hidden', cursor: 'pointer' }}>
-                  <img src="/assets/tentwedding2.jpeg" alt="Tent Wedding" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-                  <div style={{ padding: '1.5rem' }}>
-                    <h3>Tent Wedding Setup</h3>
-                    <p>Elegant tent wedding setup for your special day, combining style and comfort by the ocean.</p>
+                ))}
+
+                {/* Call to Action Section */}
+                <div className="cta-section" style={{
+                  background: 'linear-gradient(135deg, #2d5a27 0%, #3a7233 100%)',
+                  borderRadius: '24px',
+                  padding: '4rem 2rem',
+                  textAlign: 'center',
+                  color: 'white',
+                  boxShadow: '0 12px 40px rgba(45, 90, 39, 0.2)'
+                }}>
+                  <h2 style={{
+                    fontSize: '2.5rem',
+                    marginBottom: '1rem',
+                    fontWeight: 'bold'
+                  }}>Ready to Plan Your Beach Event?</h2>
+                  <p style={{
+                    fontSize: '1.2rem',
+                    marginBottom: '2rem',
+                    maxWidth: '600px',
+                    margin: '0 auto 2rem auto',
+                    lineHeight: '1.6'
+                  }}>Contact us to discuss your requirements and get a customized quote for your perfect beach setup</p>
+                  
+                  <div className="cta-buttons" style={{
+                    display: 'flex',
+                    gap: '1rem',
+                    justifyContent: 'center',
+                    flexWrap: 'wrap'
+                  }}>
+                    <button
+                      onClick={() => window.open('https://wa.me/254797185854?text=Hello%20EcoFriendly%20Beach%20Rentals!%20I\'d%20like%20to%20discuss%20my%20beach%20event%20requirements.', '_blank')}
+                      style={{
+                        background: 'white',
+                        color: '#2d5a27',
+                        border: 'none',
+                        padding: '1rem 2rem',
+                        borderRadius: '50px',
+                        fontSize: '1.1rem',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.transform = 'translateY(-2px)';
+                        e.target.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.transform = 'translateY(0)';
+                        e.target.style.boxShadow = 'none';
+                      }}
+                    >
+                      💬 Chat on WhatsApp
+                    </button>
+                    <button
+                      onClick={() => setCurrentPage('contact')}
+                      style={{
+                        background: 'transparent',
+                        color: 'white',
+                        border: '2px solid white',
+                        padding: '1rem 2rem',
+                        borderRadius: '50px',
+                        fontSize: '1.1rem',
+                        fontWeight: 'bold',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = 'white';
+                        e.target.style.color = '#2d5a27';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = 'transparent';
+                        e.target.style.color = 'white';
+                      }}
+                    >
+                      Get Quote
+                    </button>
                   </div>
                 </div>
               </div>
@@ -979,7 +1376,7 @@ function App() {
         zIndex: 1000,
         background: 'transparent',
         border: 'none',
-        padding: '0.5rem 0'
+        padding: '0.2rem 0'
       }}>
         <div className="container">
           <div className="header-content">
