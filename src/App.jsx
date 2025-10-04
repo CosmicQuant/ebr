@@ -37,29 +37,24 @@ function App() {
   // Carousel images and subtitles for homepage hero
   const carouselImages = [
     {
-      url: '/assets/vace.jpg',
-      subtitle: 'ELEGANT FLOWER VASES',
-      text: 'Add a touch of elegance to your event with our beautiful vases.'
+      url: '/assets/landing1.png',
+      subtitle: 'BEACH SETUP ONE',
+      text: 'Professional beach event setup with elegant styling.'
+    },
+    {
+      url: '/assets/landing2.jpeg',
+      subtitle: 'BEACH SETUP TWO',
+      text: 'Beautiful coastal arrangements for memorable occasions.'
     },
     {
       url: '/assets/landing3.jpeg',
-      subtitle: 'MEMORABLE EXPERIENCES',
-      text: 'Create unique memories with our curated beach experiences.'
+      subtitle: 'BEACH SETUP THREE',
+      text: 'Stunning beachside configurations for special events.'
     },
     {
-      url: 'https://uca1f6ca0b26789d6afc3baff1e7.previews.dropboxusercontent.com/p/thumb/ACwj6OtF3d-WdFuMEfno35YdvzU88sSh4abC3sTL7-2CCAswU5Hbmxn17R9H7QSHNfUBCZ1a_yOCXjWO6ntSuQnODu4L6XpBIgWjiB18M2kjtUHLf4vJGHYTLGm5vZJUfFplLeMd3r3ed3Ur1daj-f9iNV-VJ56Xhy1wUsoeCE9cfe7kpqV7RjnRP9No8o-5iERFPNJPSMZYbAh8V5XFBc0rhtSNu7r3T74W0VkhLXzkk_Zj652CGrhr7PYPfU_rHO8U0aUn4mT2sFp-6UKBLxb63VirEOZt599HPYIOMuT2y4IchaYyhwM667t7x22QD2Xe84hZyw8FkaEGBFHw-UJ2sAfk8-b9eaIfJZydbB34NA/p.jpeg',
-      subtitle: 'BEACH SETUP PERFECTION',
-      text: 'Professional beach event setups that create unforgettable moments.'
-    },
-    {
-      url: '/assets/twotents.jpeg',
-      subtitle: 'DOUBLE TENT SETUP',
-      text: 'Spacious and stylish tent arrangements for any occasion.'
-    },
-    {
-      url: '/assets/landingch1.jpg',
-      subtitle: 'CHIC BEACH SEATING',
-      text: 'Relax and enjoy with our stylish beach chairs.'
+      url: '/assets/landing4.png',
+      subtitle: 'BEACH SETUP FOUR',
+      text: 'Elegant beach rental setups for perfect celebrations.'
     },
   ];
 
@@ -230,7 +225,7 @@ function App() {
                   </div>
                 </div>
                 <div className="feature-row full-page-feature">
-                  <img src="/assets/landingch1.jpg" alt="Beach Events" className="feature-img-large" />
+                  <img src="/assets/landing1.png" alt="Beach Events" className="feature-img-large" />
                   <div className="feature-desc">
                     <h3>Events</h3>
                     <p>
@@ -255,6 +250,29 @@ function App() {
               .features-vertical {
                 min-height: 300vh; /* Allows for scroll-based animation */
                 position: relative;
+              }
+
+              /* Scroll down button animation */
+              @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% {
+                  transform: translateY(0);
+                }
+                40% {
+                  transform: translateY(-10px);
+                }
+                60% {
+                  transform: translateY(-5px);
+                }
+              }
+
+              .scroll-down-button:hover div {
+                background-color: rgba(255, 255, 255, 0.2) !important;
+                border-color: rgba(255, 255, 255, 1) !important;
+                transform: scale(1.1);
+              }
+
+              .scroll-down-button:hover span {
+                color: rgba(255, 255, 255, 1) !important;
               }
               
               .features-viewport {
@@ -414,20 +432,87 @@ function App() {
               }
             `}</style>
 
-            <section className="impact-stats-section">
-              <div className="container">
-                <h2 className="section-title" style={{ textAlign: 'center' }}>Our Experience in Numbers</h2>
-                <p className="section-subtitle">Trusted by hundreds of clients for their special beach events</p>
-                <div className="stats-grid">
+            <section className="impact-stats-section" style={{
+              backgroundImage: 'url(/assets/landing2.jpeg)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundAttachment: 'fixed',
+              position: 'relative',
+              padding: '8rem 0',
+              textAlign: 'center',
+              width: '100vw',
+              marginLeft: 'calc(-50vw + 50%)',
+              marginRight: 'calc(-50vw + 50%)'
+            }}>
+              {/* No overlay for transparent background */}
+              
+              <div style={{ 
+                position: 'relative', 
+                zIndex: 2,
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '0 2rem'
+              }}>
+                <h2 className="section-title" style={{ 
+                  textAlign: 'center',
+                  color: 'white',
+                  fontSize: '3.5rem',
+                  marginBottom: '2rem',
+                  fontWeight: 'bold',
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
+                  letterSpacing: '1px'
+                }}>Our Experience in Numbers</h2>
+                
+                <p className="section-subtitle" style={{
+                  color: 'white',
+                  fontSize: '1.4rem',
+                  marginBottom: '3rem',
+                  maxWidth: '900px',
+                  margin: '0 auto 3rem auto',
+                  lineHeight: '1.7',
+                  textShadow: '1px 1px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)',
+                  fontWeight: '500'
+                }}>Trusted by hundreds of clients for their special beach events</p>
+                
+                <div className="stats-grid" ref={(el) => {
+                  if (el && animatedStats) {
+                    setTimeout(() => animateCounters(), 500);
+                  }
+                }}>
                   {impactStats.map((stat, index) => (
                     <div 
                       key={index} 
                       className={`stat-card ${animatedStats ? 'animated' : ''}`}
-                      style={{ animationDelay: `${index * 0.2}s` }}
+                      style={{ 
+                        animationDelay: `${index * 0.2}s`,
+                        background: 'transparent',
+                        border: 'none',
+                        padding: '2rem',
+                        textAlign: 'center'
+                      }}
                     >
-                      <div className="stat-icon">{stat.icon}</div>
-                      <div className="stat-number counter" data-target={stat.number.replace(/[^0-9]/g, '')}>0</div>
-                      <div className="stat-label">{stat.label}</div>
+                      <div className="stat-icon" style={{
+                        fontSize: '3rem',
+                        marginBottom: '1rem'
+                      }}>{stat.icon}</div>
+                      <div className="stat-number counter" 
+                           data-target={stat.number.replace(/[^0-9]/g, '')}
+                           style={{
+                             color: '#000000',
+                             fontSize: '3.5rem',
+                             fontWeight: '900',
+                             marginBottom: '0.5rem',
+                             textShadow: 'none',
+                             letterSpacing: '1px'
+                           }}>0</div>
+                      <div className="stat-label" style={{
+                        color: '#000000',
+                        fontSize: '1.2rem',
+                        fontWeight: '700',
+                        textShadow: 'none',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.5px'
+                      }}>{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -546,7 +631,7 @@ function App() {
 
             {/* Call to Action Section */}
             <section className="cta-section" style={{
-              backgroundImage: 'url(https://uc7ede29cfd945d86e4b0d5454ef.previews.dropboxusercontent.com/p/thumb/ACxn7YCIztnVk2VAZ4qyeQBDzhUtuJJjObfdYDH8PYFypZtSQyDqAXyP_erLKUk1Ph14xppQKGU2fbd_DyZij-GACG24QEr5-VgejN_VSp9klUdh7ISZlfh6mGgC9lI-w3ILhS6Xn0nKD7lgquybVPhrZpTJdfbnZJqoP9K1m7fEl0eR_biPv4uUjLt7Ym_z-z0Oj7dP-Qu47g4F7-wMrgSNzWRnCCmcGuOSikuGmqQk1WhkK30n1oqd_nDSnH8zV4e92IPBH5C5xoFoLpvJ0hDu3IZ-FmXTlzGUUT21fGxshFkcurSsw1YQndjboOP1bT4ZqaMmBZ8FkOdGj8TUVKruoIn8GN4es9FVX9YViqP6Gg/p.png)',
+              backgroundImage: 'url(/assets/landing1.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundAttachment: 'fixed',
@@ -894,7 +979,7 @@ function App() {
         zIndex: 1000,
         background: 'transparent',
         border: 'none',
-        padding: '1rem 0'
+        padding: '0.5rem 0'
       }}>
         <div className="container">
           <div className="header-content">
@@ -926,7 +1011,7 @@ function App() {
                   onClick={() => setCurrentPage(item.id)}
                   style={{
                     color: currentPage === item.id ? '#fff' : 'rgba(255, 255, 255, 0.9)',
-                    background: currentPage === item.id ? 'rgba(255, 255, 255, 0.25)' : 'transparent',
+                    background: 'transparent',
                     border: 'none',
                     borderRadius: '20px',
                     padding: '0.6rem 1.2rem',
@@ -935,14 +1020,10 @@ function App() {
                     cursor: 'pointer'
                   }}
                   onMouseEnter={(e) => {
-                    if (currentPage !== item.id) {
-                      e.target.style.background = 'rgba(255, 255, 255, 0.1)';
-                    }
+                    e.target.style.background = 'transparent';
                   }}
                   onMouseLeave={(e) => {
-                    if (currentPage !== item.id) {
-                      e.target.style.background = 'transparent';
-                    }
+                    e.target.style.background = 'transparent';
                   }}
                 >
                   <span className="nav-icon">{item.icon}</span>
@@ -1001,14 +1082,52 @@ function App() {
             <div className="hero-overlay">
               <div className="container">
                 <div className="hero-content">
-                  <h2 className="carousel-title" style={{ color: 'white', fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-                    {carouselImages[carouselIndex].subtitle}
-                  </h2>
-                  <p className="carousel-text" style={{ color: 'white', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
-                    {carouselImages[carouselIndex].text}
-                  </p>
+                  {/* Text removed for cleaner carousel display */}
                 </div>
               </div>
+            </div>
+            
+            {/* Animated scroll down button */}
+            <div className="scroll-down-button" style={{
+              position: 'absolute',
+              bottom: '30px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              cursor: 'pointer',
+              zIndex: 10,
+              animation: 'bounce 2s infinite'
+            }} onClick={() => {
+              const nextSection = document.querySelector('.intro-section');
+              if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}>
+              <div style={{
+                width: '40px',
+                height: '40px',
+                border: '2px solid rgba(255, 255, 255, 0.8)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                transition: 'all 0.3s ease'
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.8)" strokeWidth="2">
+                  <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                </svg>
+              </div>
+              <span style={{
+                color: 'rgba(255, 255, 255, 0.7)',
+                fontSize: '12px',
+                marginTop: '8px',
+                fontWeight: '500',
+                letterSpacing: '1px'
+              }}>SCROLL</span>
             </div>
           </section>
         ) : (
