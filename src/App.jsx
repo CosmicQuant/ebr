@@ -36,6 +36,7 @@ const productCategories = [
         id: 'weddings',
         name: 'Weddings',
         image: '/assets/landing3.jpeg',
+        images: ['/assets/landing3.jpeg', '/assets/vace.jpg', '/assets/landing1.png'],
         description: 'Create the wedding of your dreams with our romantic beach ceremony setups. From intimate vow exchanges to grand celebrations, we provide elegant decorations, comfortable seating, and stunning backdrops.',
         features: ['Romantic Setup', 'Elegant Decorations', 'Comfortable Seating']
       },
@@ -43,6 +44,7 @@ const productCategories = [
         id: 'events',
         name: 'Events',
         image: '/assets/landing1.png',
+        images: ['/assets/landing1.png', '/assets/landing3.jpeg', '/assets/twotents.jpeg'],
         description: 'Transform any occasion into an unforgettable beachside celebration. Whether it\'s a corporate retreat, birthday party, anniversary celebration, or family reunion, our comprehensive event packages include premium seating, dining setups, and entertainment areas.',
         features: ['Premium Seating', 'Dining Setups', 'Entertainment Areas']
       },
@@ -64,6 +66,7 @@ const productCategories = [
         id: 'beach-shades',
         name: 'Beach Shades',
         image: '/assets/38.jpg',
+        images: ['/assets/38.jpg', '/assets/39.jpg', '/assets/landing3.jpeg'],
         description: 'Durable and stylish umbrellas providing excellent sun protection',
         features: ['UV Protection', 'Wind Resistant', 'Easy Setup']
       },
@@ -123,6 +126,8 @@ const productCategories = [
 function App() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [animatedStats, setAnimatedStats] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -134,6 +139,16 @@ function App() {
     const message = `Hello EcoFriendly Beach Rentals! I'm interested in the ${productName}. Could you please provide more details and pricing?`;
     const whatsappUrl = `https://wa.me/254797185854?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+  };
+
+  // Product details navigation
+  const viewProductDetails = (productId) => {
+    const product = productCategories.flatMap(cat => cat.products).find(p => p.id === productId);
+    if (product) {
+      setSelectedProduct(product);
+      setActiveImageIndex(0); // Reset to first image
+      setCurrentPage('product-details');
+    }
   };
 
   // View product details function (placeholder for now)
@@ -1199,7 +1214,7 @@ function App() {
                               cursor: 'pointer',
                               transition: 'all 0.3s ease'
                             }}
-                            onClick={() => viewProduct(product.id)}
+                            onClick={() => viewProductDetails(product.id)}
                             onMouseEnter={(e) => {
                               e.currentTarget.style.transform = 'translateY(-8px)';
                               e.currentTarget.style.boxShadow = '0 20px 60px rgba(0,0,0,0.15)';
@@ -1351,7 +1366,7 @@ function App() {
                           key={product.id} 
                           className="product-card scroll-animate" 
                           data-delay={categoryIndex * 200 + productIndex * 100}
-                          onClick={() => viewProduct(product.id)}
+                          onClick={() => viewProductDetails(product.id)}
                           style={{
                             background: 'white',
                             borderRadius: '20px',
@@ -1761,6 +1776,362 @@ function App() {
           </div>
         );
 
+      case 'product-details':
+        if (!selectedProduct) {
+          return (
+            <div className="page-content" style={{ marginTop: 0, paddingTop: '20px', textAlign: 'center' }}>
+              <h2>Product not found</h2>
+              <p>Please select a product from the products page.</p>
+              <button onClick={() => setCurrentPage('products')} style={{
+                background: '#4CAF50',
+                color: 'white',
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer'
+              }}>
+                Back to Products
+              </button>
+            </div>
+          );
+        }
+        
+        const relatedProducts = productCategories
+          .flatMap(cat => cat.products)
+          .filter(p => p.id !== selectedProduct.id)
+          .slice(0, 3);
+
+        return (
+          <div className="page-content" style={{ marginTop: 0, paddingTop: '140px' }}>
+            {/* Product Details Container */}
+            <div style={{
+              maxWidth: '1200px',
+              margin: '0 auto',
+              padding: '20px',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '50px',
+              alignItems: 'start'
+            }}>
+              {/* Product Gallery */}
+              <div style={{
+                position: 'sticky',
+                top: '120px'
+              }}>
+                <img 
+                  src={selectedProduct.images ? selectedProduct.images[activeImageIndex] : selectedProduct.image} 
+                  alt={selectedProduct.name}
+                  style={{
+                    width: '100%',
+                    height: '400px',
+                    objectFit: 'cover',
+                    borderRadius: '15px',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+                    marginBottom: '20px'
+                  }}
+                />
+                
+                {/* Thumbnail Gallery */}
+                {selectedProduct.images && selectedProduct.images.length > 1 && (
+                  <div style={{
+                    display: 'flex',
+                    gap: '10px',
+                    overflowX: 'auto',
+                    padding: '10px 0'
+                  }}>
+                    {selectedProduct.images.map((img, index) => (
+                      <img
+                        key={index}
+                        src={img}
+                        alt={`${selectedProduct.name} ${index + 1}`}
+                        onClick={() => setActiveImageIndex(index)}
+                        style={{
+                          width: '80px',
+                          height: '80px',
+                          objectFit: 'cover',
+                          borderRadius: '8px',
+                          cursor: 'pointer',
+                          opacity: activeImageIndex === index ? 1 : 0.6,
+                          border: activeImageIndex === index ? '2px solid #4CAF50' : 'none',
+                          transition: 'opacity 0.3s ease',
+                          flexShrink: 0
+                        }}
+                        onMouseEnter={(e) => e.target.style.opacity = 1}
+                        onMouseLeave={(e) => e.target.style.opacity = activeImageIndex === index ? 1 : 0.6}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Product Info */}
+              <div style={{ padding: '20px 0' }}>
+                <h2 style={{
+                  fontSize: '2.5em',
+                  color: '#333',
+                  marginBottom: '15px',
+                  fontWeight: '700'
+                }}>{selectedProduct.name}</h2>
+                
+                <div style={{
+                  background: '#4CAF50',
+                  color: 'white',
+                  padding: '5px 15px',
+                  borderRadius: '20px',
+                  fontSize: '0.9em',
+                  display: 'inline-block',
+                  marginBottom: '15px'
+                }}>Premium Rental</div>
+                
+                <div style={{
+                  fontSize: '1.1em',
+                  lineHeight: '1.6',
+                  color: '#666',
+                  marginBottom: '30px'
+                }}>{selectedProduct.description}</div>
+
+                {/* Features */}
+                <div style={{
+                  background: '#f9f9f9',
+                  padding: '25px',
+                  borderRadius: '10px',
+                  marginBottom: '30px'
+                }}>
+                  <h3 style={{
+                    color: '#333',
+                    marginBottom: '15px',
+                    fontSize: '1.3em'
+                  }}>Features & Included Items</h3>
+                  <ul style={{
+                    listStyle: 'none',
+                    padding: 0,
+                    margin: '20px 0'
+                  }}>
+                    {selectedProduct.features.map((feature, index) => (
+                      <li key={index} style={{
+                        padding: '8px 0',
+                        borderBottom: '1px solid #eee',
+                        color: '#333'
+                      }}>✅ {feature}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Specifications */}
+                <div style={{
+                  background: '#f9f9f9',
+                  padding: '25px',
+                  borderRadius: '10px',
+                  marginBottom: '30px'
+                }}>
+                  <h3 style={{
+                    color: '#333',
+                    marginBottom: '15px',
+                    fontSize: '1.3em'
+                  }}>Specifications</h3>
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '10px 0',
+                    borderBottom: '1px solid #eee'
+                  }}>
+                    <span style={{ fontWeight: '600', color: '#333' }}>Material</span>
+                    <span style={{ color: '#666' }}>Premium Quality</span>
+                  </div>
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '10px 0',
+                    borderBottom: '1px solid #eee'
+                  }}>
+                    <span style={{ fontWeight: '600', color: '#333' }}>Durability</span>
+                    <span style={{ color: '#666' }}>Weather Resistant</span>
+                  </div>
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '10px 0'
+                  }}>
+                    <span style={{ fontWeight: '600', color: '#333' }}>Setup</span>
+                    <span style={{ color: '#666' }}>Professional Installation</span>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div style={{
+                  display: 'flex',
+                  gap: '15px',
+                  marginTop: '30px'
+                }}>
+                  <button
+                    onClick={() => inquireWhatsApp(selectedProduct.name)}
+                    style={{
+                      background: '#4CAF50',
+                      color: 'white',
+                      padding: '15px 30px',
+                      border: 'none',
+                      borderRadius: '8px',
+                      fontSize: '1.1em',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = '#45a049';
+                      e.target.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = '#4CAF50';
+                      e.target.style.transform = 'translateY(0)';
+                    }}
+                  >
+                    💬 Inquire Now
+                  </button>
+                  <button
+                    onClick={() => setCurrentPage('products')}
+                    style={{
+                      background: 'transparent',
+                      color: '#4CAF50',
+                      border: '2px solid #4CAF50',
+                      padding: '15px 30px',
+                      borderRadius: '8px',
+                      fontSize: '1.1em',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = '#4CAF50';
+                      e.target.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = 'transparent';
+                      e.target.style.color = '#4CAF50';
+                    }}
+                  >
+                    ← Back to Products
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Related Products */}
+            <div style={{
+              marginTop: '80px',
+              padding: '50px 0',
+              background: '#f8f9fa'
+            }}>
+              <div className="container">
+                <h3 style={{
+                  textAlign: 'center',
+                  marginBottom: '40px',
+                  fontSize: '2em',
+                  color: '#333'
+                }}>Related Products</h3>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+                  gap: '30px',
+                  maxWidth: '1200px',
+                  margin: '0 auto',
+                  padding: '0 20px'
+                }}>
+                  {relatedProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      onClick={() => viewProductDetails(product.id)}
+                      style={{
+                        background: 'white',
+                        borderRadius: '10px',
+                        overflow: 'hidden',
+                        boxShadow: '0 5px 15px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.3s ease',
+                        cursor: 'pointer'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'translateY(-5px)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                      }}
+                    >
+                      <img 
+                        src={product.image} 
+                        alt={product.name}
+                        style={{
+                          width: '100%',
+                          height: '200px',
+                          objectFit: 'cover'
+                        }}
+                      />
+                      <div style={{ padding: '20px' }}>
+                        <h4 style={{
+                          color: '#333',
+                          marginBottom: '10px'
+                        }}>{product.name}</h4>
+                        <p style={{
+                          color: '#666',
+                          fontSize: '0.9em'
+                        }}>{product.description.slice(0, 100)}...</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Responsive Styles */}
+            <style>{`
+              @media (max-width: 768px) {
+                .product-container {
+                  grid-template-columns: 1fr !important;
+                  gap: 25px !important;
+                  padding: 25px 20px !important;
+                }
+                
+                .product-gallery {
+                  position: static !important;
+                  margin-bottom: 20px;
+                }
+                
+                .main-image {
+                  height: 250px !important;
+                  border-radius: 10px !important;
+                }
+                
+                .product-title {
+                  font-size: 1.8em !important;
+                  line-height: 1.3;
+                  margin-bottom: 15px;
+                }
+                
+                .action-buttons {
+                  flex-direction: column !important;
+                  gap: 12px !important;
+                  margin-top: 25px;
+                }
+                
+                .btn-primary,
+                .btn-secondary {
+                  width: 100% !important;
+                  justify-content: center !important;
+                }
+                
+                .related-grid {
+                  grid-template-columns: 1fr !important;
+                  gap: 20px !important;
+                }
+              }
+            `}</style>
+          </div>
+        );
+
       default:
         return null;
     }
@@ -1829,14 +2200,18 @@ function App() {
                   className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
                   onClick={() => setCurrentPage(item.id)}
                   style={{
-                    color: currentPage === item.id ? '#fff' : 'rgba(255, 255, 255, 0.9)',
-                    background: 'transparent',
-                    border: 'none',
+                    color: currentPage === item.id ? '#fff' : 
+                           (currentPage === 'product-details' ? '#333' : 'rgba(255, 255, 255, 0.9)'),
+                    background: currentPage === 'product-details' ? 
+                               (currentPage === item.id ? '#4CAF50' : 'rgba(255, 255, 255, 0.8)') : 
+                               'transparent',
+                    border: currentPage === 'product-details' ? '1px solid rgba(0,0,0,0.1)' : 'none',
                     borderRadius: '20px',
                     padding: '0.6rem 1.2rem',
                     transition: 'all 0.3s ease',
                     fontWeight: '600',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    boxShadow: currentPage === 'product-details' ? '0 2px 8px rgba(0,0,0,0.1)' : 'none'
                   }}
                 >
                   <span className="nav-icon">{item.icon}</span>
@@ -1943,7 +2318,7 @@ function App() {
               }}>SCROLL</span>
             </div>
           </section>
-        ) : currentPage !== 'products' ? (
+        ) : currentPage !== 'products' && currentPage !== 'product-details' ? (
           <section className="hero" style={{backgroundImage: `url(${heroImages[currentPage]})`}}>
             <div className="hero-overlay">
               <div className="container">
