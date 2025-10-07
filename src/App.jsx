@@ -64,7 +64,7 @@ const productCategories = [
     products: [
       {
         id: 'beach-shades',
-        name: 'Beach Shades',
+        name: 'Umbrellas',
         image: '/assets/38.jpg',
         images: ['/assets/38.jpg', '/assets/39.jpg', '/assets/landing3.jpeg'],
         description: 'Durable and stylish umbrellas providing excellent sun protection',
@@ -72,16 +72,16 @@ const productCategories = [
       },
       {
         id: 'canvas-beach-chairs',
-        name: 'Canvas Beach Chairs',
+        name: 'Canvas Chairs',
         image: '/assets/Canvas Beach Chairs.jpeg',
-        description: 'Comfortable and portable canvas chairs perfect for beach relaxation',
+        description: 'Comfortable and portable canvas chairs perfect for relaxation',
         features: ['Lightweight', 'Durable Canvas', 'Portable']
       },
       {
         id: 'beach-tables',
-        name: 'Beach Tables',
+        name: 'Tables',
         image: '/assets/landing4.png',
-        description: 'Sturdy tables perfect for dining and activities on the beach',
+        description: 'Sturdy tables perfect for dining and activities',
         features: ['Weather Resistant', 'Stable Design', 'Easy to Clean']
       },
       {
@@ -114,7 +114,7 @@ const productCategories = [
       },
       {
         id: 'sisal-mats',
-        name: 'Sisal Beach Mats',
+        name: 'Sisal Mats',
         image: '/assets/Sisal Beach Marts.jpeg',
         description: 'Natural fiber mats providing comfortable ground coverage',
         features: ['Natural Fiber', 'Sand Resistant', 'Eco-Friendly']
@@ -136,7 +136,7 @@ function App() {
 
   // WhatsApp inquiry function
   const inquireWhatsApp = (productName) => {
-    const message = `Hello EcoFriendly Beach Rentals! I'm interested in the ${productName}. Could you please provide more details and pricing?`;
+    const message = `Hello Eco-friendly Beach Rentals! I'm interested in the ${productName}. Could you please provide more details and pricing?`;
     const whatsappUrl = `https://wa.me/254797185854?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -148,6 +148,8 @@ function App() {
       setSelectedProduct(product);
       setActiveImageIndex(0); // Reset to first image
       setCurrentPage('product-details');
+      // Scroll to top when viewing product details
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -188,7 +190,7 @@ function App() {
   // Testimonials data
   const testimonials = [
     {
-      text: "EcoFriendly Beach Rentals made our beach wedding absolutely magical! Their attention to detail and sustainable approach was exactly what we wanted. Highly recommended!",
+      text: "Eco-friendly Beach Rentals made our beach wedding absolutely magical! Their attention to detail and sustainable approach was exactly what we wanted. Highly recommended!",
       author: "Sarah & James, Beach Wedding 2024"
     },
     {
@@ -350,7 +352,7 @@ function App() {
           <div className="page-content">
             <section className="intro-section">
               <h2 className="section-title carousel-title-animate scroll-animate" data-delay="200" style={{ textAlign: 'center' }}>
-                EcoFriendly Beach Rentals
+                Eco-friendly Beach Rentals
               </h2>
               <p className="section-subtitle home-centered scroll-animate" data-delay="400">
                 Located in Diani Beach, Kenya, we offer sustainable rentals for beach weddings, parties, and events.
@@ -367,7 +369,9 @@ function App() {
               </div>
               
               <div className="features-viewport">
-                <div className="feature-row full-page-feature">
+                <div className="feature-row full-page-feature" 
+                     onClick={() => viewProductDetails('weddings')}
+                     style={{ cursor: 'pointer' }}>
                   <img src="/assets/landing3.jpeg" alt="Beach Weddings" className="feature-img-large" />
                   <div className="feature-desc">
                     <h3>Weddings</h3>
@@ -376,7 +380,9 @@ function App() {
                     </p>
                   </div>
                 </div>
-                <div className="feature-row full-page-feature">
+                <div className="feature-row full-page-feature"
+                     onClick={() => viewProductDetails('events')}
+                     style={{ cursor: 'pointer' }}>
                   <img src="/assets/landing1.png" alt="Beach Events" className="feature-img-large" />
                   <div className="feature-desc">
                     <h3>Events</h3>
@@ -385,7 +391,9 @@ function App() {
                     </p>
                   </div>
                 </div>
-                <div className="feature-row full-page-feature">
+                <div className="feature-row full-page-feature"
+                     onClick={() => viewProductDetails('experiences')}
+                     style={{ cursor: 'pointer' }}>
                   <img src="/assets/vace.jpg" alt="Beach Experiences" className="feature-img-large" />
                   <div className="feature-desc">
                     <h3>Experiences</h3>
@@ -673,7 +681,7 @@ function App() {
 
             <section id="why-choose-us" className="scroll-animation">
               <div className="container">
-                <h2 className="section-title scroll-animate" data-delay="200" style={{ textAlign: 'center' }}>Why Choose EcoFriendly Beach Rentals?</h2>
+                <h2 className="section-title scroll-animate" data-delay="200" style={{ textAlign: 'center' }}>Why Choose Eco-friendly Beach Rentals?</h2>
                 <p className="section-subtitle scroll-animate" data-delay="400" style={{ textAlign: 'center' }}>Experience the difference with Diani Beach's premier sustainable rental service</p>
                 <div className="why-choose-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginTop: '2rem' }}>
                   <div className="why-choose-item scroll-animate" data-delay="600" style={{ background: 'white', padding: '2rem', borderRadius: '16px', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', textAlign: 'center' }}>
@@ -967,7 +975,7 @@ function App() {
                   marginBottom: '1.5rem',
                   fontWeight: 'bold',
                   textShadow: '3px 3px 12px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.8)'
-                }}>About EcoFriendly Beach Rentals</h1>
+                }}>About Eco-friendly Beach Rentals</h1>
                 <p style={{
                   color: 'white',
                   fontSize: '1.3rem',
@@ -1344,7 +1352,7 @@ function App() {
                                   style={{ 
                                     width: '20px', 
                                     height: '20px',
-                                    filter: 'brightness(0) invert(1)'
+                                    objectFit: 'contain'
                                   }}
                                 />
                                 Inquire Now
@@ -1528,7 +1536,7 @@ function App() {
                       flexWrap: 'wrap'
                     }}>
                       <a 
-                        href="https://wa.me/254797185854?text=Hello%20EcoFriendly%20Beach%20Rentals!%20I'd%20like%20to%20discuss%20my%20beach%20event%20requirements." 
+                        href="https://wa.me/254797185854?text=Hello%20Eco-friendly%20Beach%20Rentals!%20I'd%20like%20to%20discuss%20my%20beach%20event%20requirements." 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="whatsapp-btn"
@@ -1708,7 +1716,7 @@ function App() {
                   <div className="social-links" style={{ marginTop: '2rem' }}>
                     <h4>Follow Us</h4>
                     <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-                      <a href="https://wa.me/254797185854?text=Hello%20EcoFriendly%20Beach%20Rentals!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <a href="https://wa.me/254797185854?text=Hello%20Eco-friendly%20Beach%20Rentals!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <img src="/assets/whatsapp.png" alt="WhatsApp" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> WhatsApp
                       </a>
                       <a href="https://instagram.com/Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -1988,7 +1996,16 @@ function App() {
                       e.target.style.transform = 'translateY(0)';
                     }}
                   >
-                    💬 Inquire Now
+                    <img 
+                      src="/assets/whatsapp.png" 
+                      alt="WhatsApp" 
+                      style={{ 
+                        width: '20px', 
+                        height: '20px', 
+                        objectFit: 'contain'
+                      }} 
+                    />
+                    Inquire Now
                   </button>
                   <button
                     onClick={() => setCurrentPage('products')}
@@ -2176,7 +2193,7 @@ function App() {
             }}>
               <img 
                 src="/assets/logo.png" 
-                alt="EcoFriendly Beach Rentals Logo" 
+                alt="Eco-friendly Beach Rentals Logo" 
                 style={{ 
                   height: '70px', 
                   width: 'auto', 
@@ -2266,7 +2283,15 @@ function App() {
 
       <main className="main">
         {currentPage === 'home' ? (
-          <section className="hero carousel-hero" style={{backgroundImage: `url(${carouselImages[carouselIndex].url})`}}>
+          <section className="hero carousel-hero" style={{
+            backgroundImage: `url(${carouselImages[carouselIndex].url})`,
+            position: 'relative',
+            width: '100%',
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
             <div className="hero-overlay">
               <div className="container">
                 <div className="hero-content">
@@ -2280,13 +2305,18 @@ function App() {
               position: 'absolute',
               bottom: '30px',
               left: '50%',
+              right: 'auto',
               transform: 'translateX(-50%)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
               cursor: 'pointer',
               zIndex: 10,
-              animation: 'bounce 2s infinite'
+              animation: 'bounce 2s infinite',
+              width: 'fit-content',
+              margin: '0',
+              textAlign: 'center'
             }} onClick={() => {
               const nextSection = document.querySelector('.intro-section');
               if (nextSection) {
@@ -2317,6 +2347,28 @@ function App() {
                 letterSpacing: '1px'
               }}>SCROLL</span>
             </div>
+            
+            {/* CSS override for perfect centering with animation */}
+            <style>{`
+              .carousel-hero .scroll-down-button {
+                left: 50% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                animation: bounceCenter 2s infinite !important;
+              }
+              
+              @keyframes bounceCenter {
+                0%, 20%, 50%, 80%, 100% {
+                  transform: translateX(-50%) translateY(0);
+                }
+                40% {
+                  transform: translateX(-50%) translateY(-10px);
+                }
+                60% {
+                  transform: translateX(-50%) translateY(-5px);
+                }
+              }
+            `}</style>
           </section>
         ) : currentPage !== 'products' && currentPage !== 'product-details' ? (
           <section className="hero" style={{backgroundImage: `url(${heroImages[currentPage]})`}}>
@@ -2341,7 +2393,7 @@ function App() {
         <div className="container">
           <div className="footer-content" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem', textAlign: 'left'}}>
             <div className="footer-section">
-              <h3>EcoFriendly Beach Rentals</h3>
+              <h3>Eco-friendly Beach Rentals</h3>
               <p>Sustainable beach event rentals in Diani Beach, Kenya</p>
               <p>📍 Diani Beach Road, Diani Beach, Kenya</p>
               <p>📞 +254797185854 | 📧 Ecofriendlybeachrentals@gmail.com</p>
@@ -2349,10 +2401,9 @@ function App() {
             <div className="footer-section">
               <h3>Our Services</h3>
               <ul style={{listStyle: 'none', padding: 0}}>
-                <li>🏖️ Beach Weddings</li>
-                <li>🎉 Beach Parties</li>
-                <li>👥 Corporate Events</li>
-                <li>📸 Photo Shoots</li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); viewProductDetails('weddings'); }} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>💒 Weddings</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); viewProductDetails('events'); }} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>🎉 Events</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); viewProductDetails('experiences'); }} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>✨ Experiences</a></li>
               </ul>
             </div>
             <div className="footer-section">
@@ -2366,7 +2417,7 @@ function App() {
             <div className="footer-section">
               <h3>Follow Us</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <a href="https://wa.me/254797185854?text=Hello%20EcoFriendly%20Beach%20Rentals!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <a href="https://wa.me/254797185854?text=Hello%20Eco-friendly%20Beach%20Rentals!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <img src="/assets/whatsapp.png" alt="WhatsApp" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> WhatsApp
                 </a>
                 <a href="https://instagram.com/Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -2382,7 +2433,7 @@ function App() {
             </div>
           </div>
           <div className="footer-bottom" style={{textAlign: 'center', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.2)', opacity: 0.9}}>
-            <p>&copy; 2025 EcoFriendly Beach Rentals. All rights reserved. | Designed for sustainable beach events</p>
+            <p>&copy; 2025 Eco-friendly Beach Rentals. All rights reserved. | Designed for sustainable beach events</p>
           </div>
         </div>
       </footer>
