@@ -124,6 +124,18 @@ const productCategories = [
 ];
 
 function App() {
+  // Set document title and favicon
+  useEffect(() => {
+    document.title = "Eco-Friendly Beach Rentals - Diani Beach, Kenya";
+    let favicon = document.querySelector("link[rel~='icon']");
+    if (!favicon) {
+      favicon = document.createElement('link');
+      favicon.rel = 'icon';
+      document.head.appendChild(favicon);
+    }
+    favicon.type = 'image/jpeg';
+    favicon.href = '/assets/emblem.jpg';
+  }, []);
   const [showSuccess, setShowSuccess] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProduct, setSelectedProduct] = useState(null);
