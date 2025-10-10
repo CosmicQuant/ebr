@@ -36,7 +36,7 @@ const productCategories = [
         id: 'weddings',
         name: 'Weddings',
         image: '/assets/landing3.jpeg',
-        images: ['/assets/landing3.jpeg', '/assets/vace.jpg', '/assets/landing1.png'],
+        images: ['/assets/landing3.jpeg', '/assets/39.jpg', '/assets/43.jpg'],
         description: 'Create the wedding of your dreams with our romantic beach ceremony setups. From intimate vow exchanges to grand celebrations, we provide elegant decorations, comfortable seating, and stunning backdrops.',
         features: ['Romantic Setup', 'Elegant Decorations', 'Comfortable Seating']
       },
@@ -44,7 +44,7 @@ const productCategories = [
         id: 'events',
         name: 'Events',
         image: '/assets/landing1.png',
-        images: ['/assets/landing1.png', '/assets/landing3.jpeg', '/assets/twotents.jpeg'],
+        images: ['/assets/landing1.png', '/assets/24.png', '/assets/40.jpg'],
         description: 'Transform any occasion into an unforgettable beachside celebration. Whether it\'s a corporate retreat, birthday party, anniversary celebration, or family reunion, our comprehensive event packages include premium seating, dining setups, and entertainment areas.',
         features: ['Premium Seating', 'Dining Setups', 'Entertainment Areas']
       },
@@ -52,6 +52,7 @@ const productCategories = [
         id: 'experiences',
         name: 'Experiences',
         image: '/assets/vace.jpg',
+        images: ['/assets/landing4.png', '/assets/16.png', '/assets/18.jpeg'],
         description: 'Indulge in curated beach experiences that go beyond ordinary events. From romantic sunset dinners and proposal setups to wellness retreats and photoshoot arrangements, we create bespoke experiences tailored to your vision.',
         features: ['Curated Experiences', 'Bespoke Design', 'Picture-Perfect Setup']
       }
@@ -64,9 +65,9 @@ const productCategories = [
     products: [
       {
         id: 'beach-shades',
-        name: 'Umbrellas',
+        name: 'Shades',
         image: '/assets/38.jpg',
-        images: ['/assets/38.jpg', '/assets/39.jpg', '/assets/landing3.jpeg'],
+        images: ['/assets/landing1.png', '/assets/landing2.jpeg', '/assets/43.jpg'],
         description: 'Durable and stylish umbrellas providing excellent sun protection',
         features: ['UV Protection', 'Wind Resistant', 'Easy Setup']
       },
@@ -74,6 +75,7 @@ const productCategories = [
         id: 'canvas-beach-chairs',
         name: 'Canvas Chairs',
         image: '/assets/Canvas Beach Chairs.jpeg',
+        images: ['/assets/Canvas Beach Chairs.jpeg', '/assets/39.jpg', '/assets/42.jpg'],
         description: 'Comfortable and portable canvas chairs perfect for relaxation',
         features: ['Lightweight', 'Durable Canvas', 'Portable']
       },
@@ -81,6 +83,7 @@ const productCategories = [
         id: 'beach-tables',
         name: 'Tables',
         image: '/assets/landing4.png',
+        images: ['/assets/landing4.png', '/assets/18.jpeg', '/assets/10.png'],
         description: 'Sturdy tables perfect for dining and activities',
         features: ['Weather Resistant', 'Stable Design', 'Easy to Clean']
       },
