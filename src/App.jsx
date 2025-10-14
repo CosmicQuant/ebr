@@ -44,15 +44,15 @@ const productCategories = [
         id: 'events',
         name: 'Events',
         image: '/assets/landing1.png',
-        images: ['/assets/landing1.png', '/assets/24.png', '/assets/40.jpg'],
+        images: ['/assets/landing1.png', '/assets/24.png', '/assets/landing3.png'],
         description: 'Transform any occasion into an unforgettable beachside celebration. Whether it\'s a corporate retreat, birthday party, anniversary celebration, or family reunion, our comprehensive event packages include premium seating, dining setups, and entertainment areas.',
         features: ['Premium Seating', 'Dining Setups', 'Entertainment Areas']
       },
       {
         id: 'experiences',
         name: 'Experiences',
-        image: '/assets/vace.jpg',
-        images: ['/assets/landing4.png', '/assets/16.png', '/assets/18.jpeg'],
+        image: '/assets/landing4.png',
+        images: ['/assets/landing4.png', '/assets/19.jpeg', '/assets/18.jpeg'],
         description: 'Indulge in curated beach experiences that go beyond ordinary events. From romantic sunset dinners and proposal setups to wellness retreats and photoshoot arrangements, we create bespoke experiences tailored to your vision.',
         features: ['Curated Experiences', 'Bespoke Design', 'Picture-Perfect Setup']
       }
@@ -66,8 +66,8 @@ const productCategories = [
       {
         id: 'beach-shades',
         name: 'Shades',
-        image: '/assets/38.jpg',
-        images: ['/assets/landing1.png', '/assets/landing2.jpeg', '/assets/43.jpg'],
+        image: '/assets/43.jpg',
+        images: ['/assets/43.jpg', '/assets/48.jpg', '/assets/29.png'],
         description: 'Durable and stylish umbrellas providing excellent sun protection',
         features: ['UV Protection', 'Wind Resistant', 'Easy Setup']
       },
