@@ -2133,12 +2133,14 @@ function App() {
                 }
                 
                 .main-image {
-                  height: 60vh !important;
+                  height: auto !important;
                   width: 100vw !important;
-                  object-fit: cover !important;
+                  max-height: 60vh !important;
+                  object-fit: contain !important;
                   border-radius: 0 !important;
                   margin-left: calc(-50vw + 50%) !important;
                   margin-right: calc(-50vw + 50%) !important;
+                  background-color: #f5f5f5 !important;
                 }
                 
                 .product-title {
