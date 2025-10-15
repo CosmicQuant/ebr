@@ -52,7 +52,7 @@ const productCategories = [
         id: 'experiences',
         name: 'Experiences',
         image: '/assets/landing4.png',
-        images: ['/assets/landing4.png', '/assets/19.jpeg', '/assets/18.jpeg'],
+        images: ['/assets/landing4.png', '/assets/19.jpeg', '/assets/16.png'],
         description: 'Indulge in curated beach experiences that go beyond ordinary events. From romantic sunset dinners and proposal setups to wellness retreats and photoshoot arrangements, we create bespoke experiences tailored to your vision.',
         features: ['Curated Experiences', 'Bespoke Design', 'Picture-Perfect Setup']
       }
@@ -1716,7 +1716,7 @@ function App() {
                       <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>📍</span>
                       <div>
                         <strong>Address</strong>
-                        <p style={{ margin: 0 }}>Diani Beach Road<br />Diani Beach, Kenya</p>
+                        <p style={{ margin: 0 }}>Mwisho wa lami opposite colobus trust<br />Diani Beach Road, Diani, Kenya</p>
                       </div>
                     </div>
                     <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
@@ -2133,8 +2133,12 @@ function App() {
                 }
                 
                 .main-image {
-                  height: 250px !important;
-                  border-radius: 10px !important;
+                  height: 60vh !important;
+                  width: 100vw !important;
+                  object-fit: cover !important;
+                  border-radius: 0 !important;
+                  margin-left: calc(-50vw + 50%) !important;
+                  margin-right: calc(-50vw + 50%) !important;
                 }
                 
                 .product-title {
@@ -2410,7 +2414,7 @@ function App() {
             <div className="footer-section">
               <h3>Eco-friendly Beach Rentals</h3>
               <p>Sustainable beach event rentals in Diani Beach, Kenya</p>
-              <p>📍 Diani Beach Road, Diani Beach, Kenya</p>
+              <p>📍 Mwisho wa lami opposite colobus trust, Diani Beach Road, Diani, Kenya</p>
               <p>📞 +254797185854 | 📧 Ecofriendlybeachrentals@gmail.com</p>
             </div>
             <div className="footer-section">
