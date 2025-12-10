@@ -139,8 +139,33 @@ function App() {
     favicon.type = 'image/jpeg';
     favicon.href = '/assets/emblem.jpg';
   }, []);
+  
   const [showSuccess, setShowSuccess] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home');
+
+  // --- ROBUST HASH PARSING FUNCTION ---
+  // This handles #contact, #/contact, #/contact/, and #Contact
+  const getPageFromHash = () => {
+    try {
+      const hash = window.location.hash;
+      if (!hash) return 'home';
+
+      // 1. Remove '#' and ALL slashes globally using Regex (/\//g)
+      // 2. Convert to lowercase
+      const cleanPage = hash.replace('#', '').replace(/\//g, '').toLowerCase();
+      
+      const validPages = ['home', 'products', 'about', 'contact', 'product-details'];
+      
+      // 3. Return the page if valid, otherwise default to home
+      return validPages.includes(cleanPage) ? cleanPage : 'home';
+    } catch (error) {
+      console.error("Hash parsing error:", error);
+      return 'home';
+    }
+  };
+
+  // 1. Initialize state with the helper function
+  const [currentPage, setCurrentPage] = useState(getPageFromHash);
+
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -154,6 +179,32 @@ function App() {
     const message = `Hello Eco-friendly Beach Rentals! I'm interested in the ${productName}. Could you please provide more details and pricing?`;
     const whatsappUrl = `https://wa.me/254797185854?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+  };
+
+  // 2. Listen for URL changes (Back/Forward buttons)
+  useEffect(() => {
+    const handleHashChange = () => {
+      const newPage = getPageFromHash();
+      // Only update if the page actually changed to avoid loops
+      setCurrentPage((prevPage) => {
+        if (prevPage !== newPage) {
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+           return newPage;
+        }
+        return prevPage;
+      });
+    };
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Cleanup listener on unmount
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  // Navigation helper that updates the URL hash
+  const navigateToPage = (page) => {
+    window.location.hash = `#${page}`;
   };
 
   // Product details navigation
@@ -913,7 +964,7 @@ function App() {
                   </a>
                   
                   <button 
-                    onClick={() => setCurrentPage('contact')}
+                    onClick={() => navigateToPage('contact')}
                     className="quote-btn"
                     style={{
                       display: 'inline-flex',
@@ -2221,7 +2272,7 @@ function App() {
                   cursor: 'pointer',
                   filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
                 }} 
-                onClick={() => setCurrentPage('home')}
+                onClick={() => navigateToPage('home')}
               />
             </div>
             
@@ -2236,7 +2287,7 @@ function App() {
                 <button
                   key={item.id}
                   className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
-                  onClick={() => setCurrentPage(item.id)}
+                  onClick={() => navigateToPage(item.id)}
                   style={{
                     color: currentPage === item.id ? '#fff' : 
                            (currentPage === 'product-details' ? '#333' : 'rgba(255, 255, 255, 0.9)'),
@@ -2289,7 +2340,7 @@ function App() {
                     key={item.id}
                     className={`nav-item${currentPage === item.id ? ' active' : ''}`}
                     style={{ color: 'white', fontSize: '1.5rem', margin: '1rem 0', background: 'none', border: 'none' }}
-                    onClick={() => { setCurrentPage(item.id); setIsMenuOpen(false); }}
+                    onClick={() => { navigateToPage(item.id); setIsMenuOpen(false); }}
                   >
                     <span className="nav-icon">{item.icon}</span>
                     <span className="nav-label">{item.label}</span>
@@ -2430,9 +2481,9 @@ function App() {
             <div className="footer-section">
               <h3>Quick Links</h3>
               <ul style={{listStyle: 'none', padding: 0}}>
-                <li><a href="#" onClick={() => setCurrentPage('about')}>About Us</a></li>
-                <li><a href="#" onClick={() => setCurrentPage('products')}>Products</a></li>
-                <li><a href="#" onClick={() => setCurrentPage('contact')}>Contact Us</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('about'); }}>About Us</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('products'); }}>Products</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('contact'); }}>Contact Us</a></li>
               </ul>
             </div>
             <div className="footer-section">

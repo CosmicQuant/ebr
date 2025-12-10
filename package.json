@@ -4,7 +4,16 @@
   "version": "1.0.0",
   "type": "module",
   "description": "EcoFriendly Beach Rentals - Sustainable beach event rentals in Diani Beach, Kenya",
-  "keywords": ["beach", "rentals", "eco-friendly", "sustainable", "diani", "kenya", "events", "weddings"],
+  "keywords": [
+    "beach",
+    "rentals",
+    "eco-friendly",
+    "sustainable",
+    "diani",
+    "kenya",
+    "events",
+    "weddings"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,7 +22,8 @@
   },
   "dependencies": {
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.10.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
