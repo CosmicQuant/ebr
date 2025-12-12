@@ -1766,7 +1766,8 @@ function App() {
                     <h3>Send us a Message</h3>
                     <form className="contact-form" name="contact" method="POST" data-netlify="true" onSubmit={(e) => {
                       e.preventDefault();
-                      const formData = new FormData(e.target);
+                      const form = e.target;
+                      const formData = new FormData(form);
                       fetch('/', {
                         method: 'POST',
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -1774,7 +1775,7 @@ function App() {
                       })
                         .then(() => {
                           setShowSuccess(true);
-                          e.target.reset();
+                          form.reset();
                           setTimeout(() => setShowSuccess(false), 5000);
                         })
                         .catch((error) => alert(error));
