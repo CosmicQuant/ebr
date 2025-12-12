@@ -24,6 +24,16 @@
 </head>
 
 <body>
+  <!-- Hidden Netlify Form for Build Detection -->
+  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <select name="event-type"></select>
+    <input type="date" name="date" />
+    <textarea name="message"></textarea>
+  </form>
+
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>

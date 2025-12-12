@@ -1764,11 +1764,22 @@ function App() {
 
                   <div className="contact-form-container">
                     <h3>Send us a Message</h3>
-                    <form className="contact-form" onSubmit={(e) => {
+                    <form className="contact-form" name="contact" method="POST" data-netlify="true" onSubmit={(e) => {
                       e.preventDefault();
-                      setShowSuccess(true);
-                      setTimeout(() => setShowSuccess(false), 5000);
+                      const formData = new FormData(e.target);
+                      fetch('/', {
+                        method: 'POST',
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: new URLSearchParams(formData).toString()
+                      })
+                      .then(() => {
+                        setShowSuccess(true);
+                        e.target.reset();
+                        setTimeout(() => setShowSuccess(false), 5000);
+                      })
+                      .catch((error) => alert(error));
                     }}>
+                      <input type="hidden" name="form-name" value="contact" />
                       <div className="form-group" style={{ marginBottom: '1rem' }}>
                         <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Full Name *</label>
                         <input type="text" id="name" name="name" required style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
