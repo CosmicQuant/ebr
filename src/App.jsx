@@ -165,14 +165,14 @@ function App() {
 
   // Update page when location changes (handled by react-router-dom)
   useEffect(() => {
-    const hash = location.hash.replace('#', '') || 'home';
-    setCurrentPage(hash);
+    const path = location.pathname.replace('/', '') || 'home';
+    setCurrentPage(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location]);
 
   // Navigation helper using react-router-dom
   const navigateToPage = (page) => {
-    navigate(`#${page}`);
+    navigate(`/${page}`);
   };
 
   // Product details navigation
