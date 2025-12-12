@@ -1772,12 +1772,12 @@ function App() {
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
                         body: new URLSearchParams(formData).toString()
                       })
-                      .then(() => {
-                        setShowSuccess(true);
-                        e.target.reset();
-                        setTimeout(() => setShowSuccess(false), 5000);
-                      })
-                      .catch((error) => alert(error));
+                        .then(() => {
+                          setShowSuccess(true);
+                          e.target.reset();
+                          setTimeout(() => setShowSuccess(false), 5000);
+                        })
+                        .catch((error) => alert(error));
                     }}>
                       <input type="hidden" name="form-name" value="contact" />
                       <div className="form-group" style={{ marginBottom: '1rem' }}>
