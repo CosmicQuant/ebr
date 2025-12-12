@@ -159,16 +159,16 @@ function App() {
     window.open(whatsappUrl, '_blank');
   };
 
+  // Use react-router-dom for navigation
+  const navigate = useNavigate();
+  const location = useLocation();
+
   // Update page when location changes (handled by react-router-dom)
   useEffect(() => {
     const hash = location.hash.replace('#', '') || 'home';
     setCurrentPage(hash);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location]);
-
-  // Use react-router-dom for navigation
-  const navigate = useNavigate();
-  const location = useLocation();
 
   // Navigation helper using react-router-dom
   const navigateToPage = (page) => {
