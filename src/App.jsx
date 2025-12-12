@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './styles-professional.css';
 import './programs-vertical-animate.css';
 import './about-hero-animated.css';
@@ -141,30 +142,7 @@ function App() {
   }, []);
 
   const [showSuccess, setShowSuccess] = useState(false);
-
-  // --- ROBUST HASH PARSING FUNCTION ---
-  // This handles #contact, #/contact, #/contact/, and #Contact
-  const getPageFromHash = () => {
-    try {
-      const hash = window.location.hash;
-      if (!hash) return 'home';
-
-      // 1. Remove '#' and ALL slashes globally using Regex (/\//g)
-      // 2. Convert to lowercase
-      const cleanPage = hash.replace('#', '').replace(/\//g, '').toLowerCase();
-
-      const validPages = ['home', 'products', 'about', 'contact', 'product-details'];
-
-      // 3. Return the page if valid, otherwise default to home
-      return validPages.includes(cleanPage) ? cleanPage : 'home';
-    } catch (error) {
-      console.error("Hash parsing error:", error);
-      return 'home';
-    }
-  };
-
-  // 1. Initialize state with the helper function
-  const [currentPage, setCurrentPage] = useState(getPageFromHash);
+  const [currentPage, setCurrentPage] = useState('home');
 
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -181,30 +159,20 @@ function App() {
     window.open(whatsappUrl, '_blank');
   };
 
-  // 2. Listen for URL changes (Back/Forward buttons)
+  // Update page when location changes (handled by react-router-dom)
   useEffect(() => {
-    const handleHashChange = () => {
-      const newPage = getPageFromHash();
-      // Only update if the page actually changed to avoid loops
-      setCurrentPage((prevPage) => {
-        if (prevPage !== newPage) {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          return newPage;
-        }
-        return prevPage;
-      });
-    };
+    const hash = location.hash.replace('#', '') || 'home';
+    setCurrentPage(hash);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location]);
 
-    // Listen for hash changes
-    window.addEventListener('hashchange', handleHashChange);
+  // Use react-router-dom for navigation
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    // Cleanup listener on unmount
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  // Navigation helper that updates the URL hash
+  // Navigation helper using react-router-dom
   const navigateToPage = (page) => {
-    window.location.hash = `#${page}`;
+    navigate(`#${page}`);
   };
 
   // Product details navigation
@@ -702,11 +670,7 @@ function App() {
                   WebkitTextStroke: '0.5px rgba(0,0,0,0.3)'
                 }}>Trusted by hundreds of clients for their special beach events</p>
 
-                <div className="stats-grid" ref={(el) => {
-                  if (el && animatedStats) {
-                    setTimeout(() => animateCounters(), 500);
-                  }
-                }}>
+                <div className="stats-grid">
                   {impactStats.map((stat, index) => (
                     <div
                       key={index}
