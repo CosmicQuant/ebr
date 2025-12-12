@@ -139,7 +139,7 @@ function App() {
     favicon.type = 'image/jpeg';
     favicon.href = '/assets/emblem.jpg';
   }, []);
-  
+
   const [showSuccess, setShowSuccess] = useState(false);
 
   // --- ROBUST HASH PARSING FUNCTION ---
@@ -152,9 +152,9 @@ function App() {
       // 1. Remove '#' and ALL slashes globally using Regex (/\//g)
       // 2. Convert to lowercase
       const cleanPage = hash.replace('#', '').replace(/\//g, '').toLowerCase();
-      
+
       const validPages = ['home', 'products', 'about', 'contact', 'product-details'];
-      
+
       // 3. Return the page if valid, otherwise default to home
       return validPages.includes(cleanPage) ? cleanPage : 'home';
     } catch (error) {
@@ -188,8 +188,8 @@ function App() {
       // Only update if the page actually changed to avoid loops
       setCurrentPage((prevPage) => {
         if (prevPage !== newPage) {
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-           return newPage;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return newPage;
         }
         return prevPage;
       });
@@ -197,7 +197,7 @@ function App() {
 
     // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
-    
+
     // Cleanup listener on unmount
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
@@ -281,13 +281,13 @@ function App() {
   // Auto-advance testimonials every 5 seconds
   useEffect(() => {
     if (currentPage !== 'home') return;
-    
+
     console.log('Setting up testimonial rotation...');
-    
+
     const interval = setInterval(() => {
       console.log('Rotating testimonial...');
       setTestimonialFading(true);
-      
+
       setTimeout(() => {
         setTestimonialIndex((prev) => {
           const nextIndex = (prev + 1) % testimonials.length;
@@ -297,7 +297,7 @@ function App() {
         setTestimonialFading(false);
       }, 300);
     }, 5000);
-    
+
     return () => {
       console.log('Cleaning up testimonial rotation...');
       clearInterval(interval);
@@ -316,7 +316,7 @@ function App() {
         // Setup scroll-triggered animations
         const setupScrollAnimations = () => {
           const scrollElements = document.querySelectorAll('.scroll-animate');
-          
+
           const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {
@@ -333,11 +333,11 @@ function App() {
             threshold: 0.3,
             rootMargin: '0px 0px -50px 0px'
           });
-          
+
           scrollElements.forEach(element => {
             observer.observe(element);
           });
-          
+
           // Trigger intro section immediately since it's at the top
           const introElements = document.querySelectorAll('.intro-section .scroll-animate');
           introElements.forEach(element => {
@@ -347,9 +347,9 @@ function App() {
             }, parseInt(delay));
           });
         };
-        
+
         setupScrollAnimations();
-        
+
         animateOnScroll();
         initScrollAnimations();
         const observer = new IntersectionObserver((entries) => {
@@ -387,7 +387,7 @@ function App() {
       // Setup scroll animations for products page
       setTimeout(() => {
         const scrollElements = document.querySelectorAll('.scroll-animate');
-        
+
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -403,7 +403,7 @@ function App() {
           threshold: 0.3,
           rootMargin: '0px 0px -50px 0px'
         });
-        
+
         scrollElements.forEach(element => {
           observer.observe(element);
         });
@@ -433,11 +433,11 @@ function App() {
                 <h2 className="section-title scroll-animate" data-delay="200" style={{ textAlign: 'center', marginBottom: '1rem' }}>Our Signature Services</h2>
                 <p className="section-subtitle scroll-animate" data-delay="400" style={{ textAlign: 'center', marginBottom: '3rem' }}>Discover our three core offerings that make every beach event extraordinary</p>
               </div>
-              
+
               <div className="features-viewport">
-                <div className="feature-row full-page-feature" 
-                     onClick={() => viewProductDetails('weddings')}
-                     style={{ cursor: 'pointer' }}>
+                <div className="feature-row full-page-feature"
+                  onClick={() => viewProductDetails('weddings')}
+                  style={{ cursor: 'pointer' }}>
                   <img src="/assets/landing3.jpeg" alt="Beach Weddings" className="feature-img-large" />
                   <div className="feature-desc">
                     <h3>Weddings</h3>
@@ -447,8 +447,8 @@ function App() {
                   </div>
                 </div>
                 <div className="feature-row full-page-feature"
-                     onClick={() => viewProductDetails('events')}
-                     style={{ cursor: 'pointer' }}>
+                  onClick={() => viewProductDetails('events')}
+                  style={{ cursor: 'pointer' }}>
                   <img src="/assets/landing1.png" alt="Beach Events" className="feature-img-large" />
                   <div className="feature-desc">
                     <h3>Events</h3>
@@ -458,8 +458,8 @@ function App() {
                   </div>
                 </div>
                 <div className="feature-row full-page-feature"
-                     onClick={() => viewProductDetails('experiences')}
-                     style={{ cursor: 'pointer' }}>
+                  onClick={() => viewProductDetails('experiences')}
+                  style={{ cursor: 'pointer' }}>
                   <img src="/assets/vace.jpg" alt="Beach Experiences" className="feature-img-large" />
                   <div className="feature-desc">
                     <h3>Experiences</h3>
@@ -470,7 +470,7 @@ function App() {
                 </div>
               </div>
             </section>
-            
+
             <style>{`
               /* Beach rental specific styles */
               .features-vertical {
@@ -671,15 +671,15 @@ function App() {
               marginRight: 'calc(-50vw + 50%)'
             }}>
               {/* No overlay for transparent background */}
-              
-              <div style={{ 
-                position: 'relative', 
+
+              <div style={{
+                position: 'relative',
                 zIndex: 2,
                 maxWidth: '1200px',
                 margin: '0 auto',
                 padding: '0 2rem'
               }}>
-                <h2 className="section-title" style={{ 
+                <h2 className="section-title" style={{
                   textAlign: 'center',
                   color: 'white',
                   fontSize: '3.5rem',
@@ -689,7 +689,7 @@ function App() {
                   letterSpacing: '1px',
                   WebkitTextStroke: '1px rgba(0,0,0,0.3)'
                 }}>Our Experience in Numbers</h2>
-                
+
                 <p className="section-subtitle" style={{
                   color: 'white',
                   fontSize: '1.4rem',
@@ -701,17 +701,17 @@ function App() {
                   fontWeight: '600',
                   WebkitTextStroke: '0.5px rgba(0,0,0,0.3)'
                 }}>Trusted by hundreds of clients for their special beach events</p>
-                
+
                 <div className="stats-grid" ref={(el) => {
                   if (el && animatedStats) {
                     setTimeout(() => animateCounters(), 500);
                   }
                 }}>
                   {impactStats.map((stat, index) => (
-                    <div 
-                      key={index} 
+                    <div
+                      key={index}
                       className={`stat-card ${animatedStats ? 'animated' : ''}`}
-                      style={{ 
+                      style={{
                         animationDelay: `${index * 0.2}s`,
                         background: 'transparent',
                         border: 'none',
@@ -723,15 +723,15 @@ function App() {
                         fontSize: '3rem',
                         marginBottom: '1rem'
                       }}>{stat.icon}</div>
-                      <div className="stat-number counter" 
-                           data-target={stat.number.replace(/[^0-9]/g, '')}
-                           style={{
-                             color: '#2d5a27',
-                             fontSize: '4rem',
-                             fontWeight: '900',
-                             marginBottom: '0.5rem',
-                             letterSpacing: '2px'
-                           }}>0</div>
+                      <div className="stat-number counter"
+                        data-target={stat.number.replace(/[^0-9]/g, '')}
+                        style={{
+                          color: '#2d5a27',
+                          fontSize: '4rem',
+                          fontWeight: '900',
+                          marginBottom: '0.5rem',
+                          letterSpacing: '2px'
+                        }}>0</div>
                       <div className="stat-label" style={{
                         color: '#333333',
                         fontSize: '1.3rem',
@@ -788,7 +788,7 @@ function App() {
               <div className="container">
                 <h2 className="section-title scroll-animate" data-delay="200" style={{ textAlign: 'center' }}>What Our Clients Say</h2>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
-                  <div className="rotating-testimonial-card scroll-animate" data-delay="400" style={{ 
+                  <div className="rotating-testimonial-card scroll-animate" data-delay="400" style={{
                     background: 'linear-gradient(135deg, #2d5a27, #4a7c59)',
                     color: 'white',
                     padding: '3rem',
@@ -800,7 +800,7 @@ function App() {
                     position: 'relative',
                     overflow: 'hidden'
                   }}>
-                    <div className="testimonial-content" style={{ 
+                    <div className="testimonial-content" style={{
                       transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
                       minHeight: '150px',
                       display: 'flex',
@@ -809,16 +809,16 @@ function App() {
                       opacity: testimonialFading ? 0 : 1,
                       transform: testimonialFading ? 'translateY(10px)' : 'translateY(0)'
                     }}>
-                      <p style={{ 
-                        fontSize: '1.2rem', 
-                        fontStyle: 'italic', 
+                      <p style={{
+                        fontSize: '1.2rem',
+                        fontStyle: 'italic',
                         marginBottom: '1.5rem',
                         lineHeight: '1.6'
                       }}>
                         "{testimonials[testimonialIndex].text}"
                       </p>
-                      <div style={{ 
-                        fontWeight: 'bold', 
+                      <div style={{
+                        fontWeight: 'bold',
                         fontSize: '1rem',
                         opacity: '0.9'
                       }}>
@@ -834,13 +834,13 @@ function App() {
                       gap: '0.5rem'
                     }}>
                       {testimonials.map((_, index) => (
-                        <span 
+                        <span
                           key={index}
-                          className="testimonial-dot" 
-                          style={{ 
-                            width: '8px', 
-                            height: '8px', 
-                            borderRadius: '50%', 
+                          className="testimonial-dot"
+                          style={{
+                            width: '8px',
+                            height: '8px',
+                            borderRadius: '50%',
                             backgroundColor: index === testimonialIndex ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.4)',
                             transition: 'background-color 0.3s ease'
                           }}
@@ -870,15 +870,15 @@ function App() {
               marginRight: 'calc(-50vw + 50%)'
             }}>
               {/* Removed overlay for transparent background */}
-              
-              <div style={{ 
-                position: 'relative', 
+
+              <div style={{
+                position: 'relative',
                 zIndex: 2,
                 width: '100%',
                 maxWidth: 'none',
                 padding: '0 2rem'
               }}>
-                <h2 className="section-title scroll-animate" data-delay="200" style={{ 
+                <h2 className="section-title scroll-animate" data-delay="200" style={{
                   textAlign: 'center',
                   color: 'white',
                   fontSize: '3.5rem',
@@ -889,7 +889,7 @@ function App() {
                 }}>
                   Ready to Plan Your Beach Event?
                 </h2>
-                
+
                 <p className="scroll-animate" data-delay="400" style={{
                   color: 'white',
                   fontSize: '1.4rem',
@@ -902,16 +902,16 @@ function App() {
                 }}>
                   Contact us to discuss your requirements and get a customized quote for your perfect beach setup
                 </p>
-                
+
                 <div className="cta-buttons scroll-animate" data-delay="600" style={{
                   display: 'flex',
                   gap: '2rem',
                   justifyContent: 'center',
                   flexWrap: 'wrap'
                 }}>
-                  <a 
-                    href="https://wa.me/254797185854" 
-                    target="_blank" 
+                  <a
+                    href="https://wa.me/254797185854"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="whatsapp-btn"
                     style={{
@@ -945,11 +945,11 @@ function App() {
                       e.target.style.boxShadow = '0 4px 15px rgba(255,255,255,0.2)';
                     }}
                   >
-                    <img 
-                      src="/assets/whatsapp.png" 
-                      alt="WhatsApp" 
-                      style={{ 
-                        width: '24px', 
+                    <img
+                      src="/assets/whatsapp.png"
+                      alt="WhatsApp"
+                      style={{
+                        width: '24px',
                         height: '24px',
                         filter: 'none'
                       }}
@@ -962,8 +962,8 @@ function App() {
                     />
                     Chat on WhatsApp
                   </a>
-                  
-                  <button 
+
+                  <button
                     onClick={() => navigateToPage('contact')}
                     className="quote-btn"
                     style={{
@@ -1028,8 +1028,8 @@ function App() {
               paddingTop: '0',
               top: '0'
             }}>
-              <div style={{ 
-                position: 'relative', 
+              <div style={{
+                position: 'relative',
                 zIndex: 2,
                 maxWidth: '800px',
                 margin: '0 auto',
@@ -1052,21 +1052,21 @@ function App() {
                 }}>Located in Diani Beach, Kenya, we offer sustainable rentals for beach weddings, parties, and events</p>
               </div>
             </section>
-            
+
             <section className="about-section" style={{ padding: '4rem 0' }}>
               <div className="container">
-                
-                <div className="about-cards-grid" style={{display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '3rem'}}>
-                  <div className="about-card" style={{background: 'white', borderRadius: '16px', boxShadow: '0 2px 16px rgba(45,90,39,0.07)', padding: '2rem', minWidth: '260px', maxWidth: '340px', textAlign: 'center'}}>
-                    <h3 style={{color: '#2d5a27'}}>🌱 Mission</h3>
+
+                <div className="about-cards-grid" style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap', marginTop: '3rem' }}>
+                  <div className="about-card" style={{ background: 'white', borderRadius: '16px', boxShadow: '0 2px 16px rgba(45,90,39,0.07)', padding: '2rem', minWidth: '260px', maxWidth: '340px', textAlign: 'center' }}>
+                    <h3 style={{ color: '#2d5a27' }}>🌱 Mission</h3>
                     <p>To provide sustainable and elegant beach event rentals while protecting the beautiful Diani Beach environment for future generations.</p>
                   </div>
-                  <div className="about-card" style={{background: 'white', borderRadius: '16px', boxShadow: '0 2px 16px rgba(45,90,39,0.07)', padding: '2rem', minWidth: '260px', maxWidth: '340px', textAlign: 'center'}}>
-                    <h3 style={{color: '#2d5a27'}}>🌍 Vision</h3>
+                  <div className="about-card" style={{ background: 'white', borderRadius: '16px', boxShadow: '0 2px 16px rgba(45,90,39,0.07)', padding: '2rem', minWidth: '260px', maxWidth: '340px', textAlign: 'center' }}>
+                    <h3 style={{ color: '#2d5a27' }}>🌍 Vision</h3>
                     <p>To be Diani Beach's leading eco-friendly event rental service, setting the standard for sustainable beach celebrations.</p>
                   </div>
-                  <div className="about-card" style={{background: 'white', borderRadius: '16px', boxShadow: '0 2px 16px rgba(45,90,39,0.07)', padding: '2rem', minWidth: '260px', maxWidth: '340px', textAlign: 'center'}}>
-                    <h3 style={{color: '#2d5a27'}}>⭐ Values</h3>
+                  <div className="about-card" style={{ background: 'white', borderRadius: '16px', boxShadow: '0 2px 16px rgba(45,90,39,0.07)', padding: '2rem', minWidth: '260px', maxWidth: '340px', textAlign: 'center' }}>
+                    <h3 style={{ color: '#2d5a27' }}>⭐ Values</h3>
                     <p>Sustainability, quality, customer satisfaction, and environmental responsibility guide everything we do.</p>
                   </div>
                 </div>
@@ -1098,9 +1098,9 @@ function App() {
               paddingTop: '0',
               top: '0'
             }}>
-              
-              <div style={{ 
-                position: 'relative', 
+
+              <div style={{
+                position: 'relative',
                 zIndex: 2,
                 maxWidth: '1200px',
                 margin: '0 auto',
@@ -1129,7 +1129,7 @@ function App() {
                   animation: 'fadeInUp 1.5s ease-out 1s forwards'
                 }}>Sustainable beach event rentals for every occasion in Diani Beach, Kenya</p>
               </div>
-              
+
               {/* Animated scroll down button */}
               <div className="scroll-down-button" style={{
                 position: 'absolute',
@@ -1164,7 +1164,7 @@ function App() {
                   transition: 'all 0.3s ease'
                 }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.9)" strokeWidth="3">
-                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
                   </svg>
                 </div>
                 <span style={{
@@ -1265,12 +1265,12 @@ function App() {
                         margin: '0 auto'
                       }}>{category.description}</p>
                     </div>
-                    
+
                     {/* Special vertical layout for "Our Packages" */}
                     {category.id === 'our-packages' ? (
                       <div className="packages-vertical-layout">
                         {category.products.map((product, productIndex) => (
-                          <div 
+                          <div
                             key={product.id}
                             className="package-item scroll-animate"
                             data-delay={productIndex * 300}
@@ -1306,8 +1306,8 @@ function App() {
                               overflow: 'hidden',
                               borderRadius: productIndex % 2 === 0 ? '24px 0 0 24px' : '0 24px 24px 0'
                             }}>
-                              <img 
-                                src={product.image} 
+                              <img
+                                src={product.image}
                                 alt={product.name}
                                 style={{
                                   width: '100%',
@@ -1349,22 +1349,22 @@ function App() {
                                 marginBottom: '1.5rem',
                                 fontWeight: 'bold'
                               }}>{product.name}</h3>
-                              
+
                               <p style={{
                                 color: '#666',
                                 lineHeight: '1.8',
                                 marginBottom: '2rem',
                                 fontSize: '1.1rem'
                               }}>{product.description}</p>
-                              
-                              <div className="product-features" style={{ 
+
+                              <div className="product-features" style={{
                                 marginBottom: '2.5rem',
                                 display: 'flex',
                                 flexWrap: 'wrap',
                                 gap: '0.5rem'
                               }}>
                                 {product.features.map((feature, featureIndex) => (
-                                  <span 
+                                  <span
                                     key={featureIndex}
                                     style={{
                                       display: 'inline-block',
@@ -1380,7 +1380,7 @@ function App() {
                                   >{feature}</span>
                                 ))}
                               </div>
-                              
+
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -1412,11 +1412,11 @@ function App() {
                                   e.target.style.boxShadow = 'none';
                                 }}
                               >
-                                <img 
-                                  src="/assets/whatsapp.png" 
-                                  alt="WhatsApp" 
-                                  style={{ 
-                                    width: '20px', 
+                                <img
+                                  src="/assets/whatsapp.png"
+                                  alt="WhatsApp"
+                                  style={{
+                                    width: '20px',
                                     height: '20px',
                                     objectFit: 'contain'
                                   }}
@@ -1436,112 +1436,112 @@ function App() {
                         marginBottom: '2rem'
                       }}>
                         {category.products.map((product, productIndex) => (
-                        <div 
-                          key={product.id} 
-                          className="product-card scroll-animate" 
-                          data-delay={categoryIndex * 200 + productIndex * 100}
-                          onClick={() => viewProductDetails(product.id)}
-                          style={{
-                            background: 'white',
-                            borderRadius: '20px',
-                            boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
-                            overflow: 'hidden',
-                            cursor: 'pointer',
-                            transition: 'all 0.3s ease',
-                            position: 'relative'
-                          }}
-                          onMouseEnter={(e) => {
-                            e.target.style.transform = 'translateY(-8px)';
-                            e.target.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.style.transform = 'translateY(0)';
-                            e.target.style.boxShadow = '0 8px 32px rgba(0,0,0,0.1)';
-                          }}
-                        >
-                          <div className="product-image" style={{ position: 'relative', overflow: 'hidden' }}>
-                            <img 
-                              src={product.image} 
-                              alt={product.name} 
-                              style={{ 
-                                width: '100%', 
-                                height: '250px', 
-                                objectFit: 'cover',
-                                transition: 'transform 0.3s ease'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.target.style.transform = 'scale(1.05)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.target.style.transform = 'scale(1)';
-                              }}
-                            />
-                            <div className="product-overlay" style={{
-                              position: 'absolute',
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              bottom: 0,
-                              background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7))',
-                              display: 'flex',
-                              alignItems: 'flex-end',
-                              justifyContent: 'center',
-                              padding: '1rem',
-                              opacity: 0,
-                              transition: 'opacity 0.3s ease'
-                            }}>
-                              <span style={{
-                                color: 'white',
-                                fontSize: '1.1rem',
-                                fontWeight: 'bold',
-                                textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
-                              }}>View Details</span>
+                          <div
+                            key={product.id}
+                            className="product-card scroll-animate"
+                            data-delay={categoryIndex * 200 + productIndex * 100}
+                            onClick={() => viewProductDetails(product.id)}
+                            style={{
+                              background: 'white',
+                              borderRadius: '20px',
+                              boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
+                              overflow: 'hidden',
+                              cursor: 'pointer',
+                              transition: 'all 0.3s ease',
+                              position: 'relative'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.target.style.transform = 'translateY(-8px)';
+                              e.target.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.target.style.transform = 'translateY(0)';
+                              e.target.style.boxShadow = '0 8px 32px rgba(0,0,0,0.1)';
+                            }}
+                          >
+                            <div className="product-image" style={{ position: 'relative', overflow: 'hidden' }}>
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                style={{
+                                  width: '100%',
+                                  height: '250px',
+                                  objectFit: 'cover',
+                                  transition: 'transform 0.3s ease'
+                                }}
+                                onMouseEnter={(e) => {
+                                  e.target.style.transform = 'scale(1.05)';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.target.style.transform = 'scale(1)';
+                                }}
+                              />
+                              <div className="product-overlay" style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.7))',
+                                display: 'flex',
+                                alignItems: 'flex-end',
+                                justifyContent: 'center',
+                                padding: '1rem',
+                                opacity: 0,
+                                transition: 'opacity 0.3s ease'
+                              }}>
+                                <span style={{
+                                  color: 'white',
+                                  fontSize: '1.1rem',
+                                  fontWeight: 'bold',
+                                  textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
+                                }}>View Details</span>
+                              </div>
+                            </div>
+
+                            <div className="product-info" style={{ padding: '2rem' }}>
+                              <h3 style={{
+                                fontSize: '1.5rem',
+                                color: '#2d5a27',
+                                marginBottom: '1rem',
+                                fontWeight: 'bold'
+                              }}>{product.name}</h3>
+                              <p style={{
+                                color: '#666',
+                                lineHeight: '1.8',
+                                marginBottom: '1.5rem',
+                                fontSize: '1rem',
+                                textAlign: 'left',
+                                maxWidth: '100%',
+                                overflow: 'visible',
+                                whiteSpace: 'normal',
+                                wordWrap: 'break-word'
+                              }}>{product.description}</p>
+
+                              <div className="product-features" style={{ marginBottom: '2rem' }}>
+                                {product.features.map((feature, featureIndex) => (
+                                  <span
+                                    key={featureIndex}
+                                    className="feature"
+                                    style={{
+                                      display: 'inline-block',
+                                      background: '#f0f8f0',
+                                      color: '#2d5a27',
+                                      padding: '0.5rem 1rem',
+                                      borderRadius: '20px',
+                                      fontSize: '0.9rem',
+                                      margin: '0.25rem',
+                                      border: '1px solid #e8f5e8'
+                                    }}
+                                  >
+                                    {feature}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
                           </div>
-                          
-                          <div className="product-info" style={{ padding: '2rem' }}>
-                            <h3 style={{
-                              fontSize: '1.5rem',
-                              color: '#2d5a27',
-                              marginBottom: '1rem',
-                              fontWeight: 'bold'
-                            }}>{product.name}</h3>
-                            <p style={{
-                              color: '#666',
-                              lineHeight: '1.8',
-                              marginBottom: '1.5rem',
-                              fontSize: '1rem',
-                              textAlign: 'left',
-                              maxWidth: '100%',
-                              overflow: 'visible',
-                              whiteSpace: 'normal',
-                              wordWrap: 'break-word'
-                            }}>{product.description}</p>
-                            
-                            <div className="product-features" style={{ marginBottom: '2rem' }}>
-                              {product.features.map((feature, featureIndex) => (
-                                <span 
-                                  key={featureIndex}
-                                  className="feature" 
-                                  style={{
-                                    display: 'inline-block',
-                                    background: '#f0f8f0',
-                                    color: '#2d5a27',
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '20px',
-                                    fontSize: '0.9rem',
-                                    margin: '0.25rem',
-                                    border: '1px solid #e8f5e8'
-                                  }}
-                                >
-                                  {feature}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
                     )}
                   </div>
                 ))}
@@ -1562,15 +1562,15 @@ function App() {
                   marginTop: '4rem'
                 }}>
                   {/* Removed overlay for transparent background */}
-                  
-                  <div style={{ 
-                    position: 'relative', 
+
+                  <div style={{
+                    position: 'relative',
                     zIndex: 2,
                     width: '100%',
                     maxWidth: 'none',
                     padding: '0 2rem'
                   }}>
-                    <h2 className="section-title scroll-animate" data-delay="200" style={{ 
+                    <h2 className="section-title scroll-animate" data-delay="200" style={{
                       textAlign: 'center',
                       color: 'white',
                       fontSize: '3.5rem',
@@ -1581,7 +1581,7 @@ function App() {
                     }}>
                       Ready to Plan Your Beach Event?
                     </h2>
-                    
+
                     <p className="scroll-animate" data-delay="400" style={{
                       color: 'white',
                       fontSize: '1.4rem',
@@ -1594,16 +1594,16 @@ function App() {
                     }}>
                       Contact us to discuss your requirements and get a customized quote for your perfect beach setup
                     </p>
-                    
+
                     <div className="cta-buttons scroll-animate" data-delay="600" style={{
                       display: 'flex',
                       gap: '2rem',
                       justifyContent: 'center',
                       flexWrap: 'wrap'
                     }}>
-                      <a 
-                        href="https://wa.me/254797185854?text=Hello%20Eco-friendly%20Beach%20Rentals!%20I'd%20like%20to%20discuss%20my%20beach%20event%20requirements." 
-                        target="_blank" 
+                      <a
+                        href="https://wa.me/254797185854?text=Hello%20Eco-friendly%20Beach%20Rentals!%20I'd%20like%20to%20discuss%20my%20beach%20event%20requirements."
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="whatsapp-btn"
                         style={{
@@ -1637,11 +1637,11 @@ function App() {
                           e.target.style.boxShadow = '0 4px 15px rgba(255,255,255,0.2)';
                         }}
                       >
-                        <img 
-                          src="/assets/whatsapp.png" 
-                          alt="WhatsApp" 
-                          style={{ 
-                            width: '24px', 
+                        <img
+                          src="/assets/whatsapp.png"
+                          alt="WhatsApp"
+                          style={{
+                            width: '24px',
                             height: '24px',
                             filter: 'none'
                           }}
@@ -1654,7 +1654,7 @@ function App() {
                         />
                         Chat on WhatsApp
                       </a>
-                      
+
                       <button
                         onClick={() => setCurrentPage('contact')}
                         style={{
@@ -1718,8 +1718,8 @@ function App() {
               paddingTop: '0',
               top: '0'
             }}>
-              <div style={{ 
-                position: 'relative', 
+              <div style={{
+                position: 'relative',
                 zIndex: 2,
                 maxWidth: '800px',
                 margin: '0 auto',
@@ -1742,109 +1742,109 @@ function App() {
                 }}>Ready to plan your perfect beach event? Get in touch with us today!</p>
               </div>
             </section>
-            
+
             <section className="contact-section" style={{ padding: '4rem 0' }}>
               <div className="container">
                 <div className="contact-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem', marginTop: '3rem' }}>
-                <div className="contact-info">
-                  <h3>Get in Touch</h3>
-                  <div className="contact-details" style={{ marginTop: '1.5rem' }}>
-                    <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                      <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>📧</span>
-                      <div>
-                        <strong>Email</strong>
-                        <p style={{ margin: 0 }}>Ecofriendlybeachrentals@gmail.com</p>
+                  <div className="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div className="contact-details" style={{ marginTop: '1.5rem' }}>
+                      <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+                        <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>📧</span>
+                        <div>
+                          <strong>Email</strong>
+                          <p style={{ margin: 0 }}>Ecofriendlybeachrentals@gmail.com</p>
+                        </div>
+                      </div>
+                      <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+                        <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>📞</span>
+                        <div>
+                          <strong>Phone</strong>
+                          <p style={{ margin: 0 }}>+254797185854</p>
+                        </div>
+                      </div>
+                      <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+                        <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>📍</span>
+                        <div>
+                          <strong>Address</strong>
+                          <p style={{ margin: 0 }}>Mwisho wa lami opposite colobus trust<br />Diani Beach Road, Diani, Kenya</p>
+                        </div>
+                      </div>
+                      <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+                        <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>🕒</span>
+                        <div>
+                          <strong>Business Hours</strong>
+                          <p style={{ margin: 0 }}>Mon - Sun: 8:00 AM - 6:00 PM</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                      <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>📞</span>
-                      <div>
-                        <strong>Phone</strong>
-                        <p style={{ margin: 0 }}>+254797185854</p>
-                      </div>
-                    </div>
-                    <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                      <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>📍</span>
-                      <div>
-                        <strong>Address</strong>
-                        <p style={{ margin: 0 }}>Mwisho wa lami opposite colobus trust<br />Diani Beach Road, Diani, Kenya</p>
-                      </div>
-                    </div>
-                    <div className="contact-item" style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                      <span className="icon" style={{ fontSize: '1.5rem', marginRight: '1rem' }}>🕒</span>
-                      <div>
-                        <strong>Business Hours</strong>
-                        <p style={{ margin: 0 }}>Mon - Sun: 8:00 AM - 6:00 PM</p>
+
+                    <div className="social-links" style={{ marginTop: '2rem' }}>
+                      <h4>Follow Us</h4>
+                      <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+                        <a href="https://wa.me/254797185854?text=Hello%20Eco-friendly%20Beach%20Rentals!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <img src="/assets/whatsapp.png" alt="WhatsApp" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> WhatsApp
+                        </a>
+                        <a href="https://instagram.com/Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <img src="/assets/ig.PNG" alt="Instagram" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> Instagram
+                        </a>
+                        <a href="https://tiktok.com/@Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <img src="/assets/tiktok.png" alt="TikTok" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> TikTok
+                        </a>
+                        <a href="https://facebook.com/Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <img src="/assets/fb.png" alt="Facebook" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> Facebook
+                        </a>
                       </div>
                     </div>
                   </div>
-                  
-                  <div className="social-links" style={{ marginTop: '2rem' }}>
-                    <h4>Follow Us</h4>
-                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-                      <a href="https://wa.me/254797185854?text=Hello%20Eco-friendly%20Beach%20Rentals!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <img src="/assets/whatsapp.png" alt="WhatsApp" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> WhatsApp
-                      </a>
-                      <a href="https://instagram.com/Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <img src="/assets/ig.PNG" alt="Instagram" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> Instagram
-                      </a>
-                      <a href="https://tiktok.com/@Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <img src="/assets/tiktok.png" alt="TikTok" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> TikTok
-                      </a>
-                      <a href="https://facebook.com/Ecofriendlybeachrentals" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <img src="/assets/fb.png" alt="Facebook" style={{ width: '22px', height: '22px', objectFit: 'contain' }} /> Facebook
-                      </a>
-                    </div>
+
+                  <div className="contact-form-container">
+                    <h3>Send us a Message</h3>
+                    <form className="contact-form" onSubmit={(e) => {
+                      e.preventDefault();
+                      setShowSuccess(true);
+                      setTimeout(() => setShowSuccess(false), 5000);
+                    }}>
+                      <div className="form-group" style={{ marginBottom: '1rem' }}>
+                        <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Full Name *</label>
+                        <input type="text" id="name" name="name" required style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
+                      </div>
+                      <div className="form-group" style={{ marginBottom: '1rem' }}>
+                        <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Email Address *</label>
+                        <input type="email" id="email" name="email" required style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
+                      </div>
+                      <div className="form-group" style={{ marginBottom: '1rem' }}>
+                        <label htmlFor="phone" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Phone Number</label>
+                        <input type="tel" id="phone" name="phone" style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
+                      </div>
+                      <div className="form-group" style={{ marginBottom: '1rem' }}>
+                        <label htmlFor="event-type" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Event Type</label>
+                        <select id="event-type" name="event-type" style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }}>
+                          <option value="">Select Event Type</option>
+                          <option value="wedding">Beach Wedding</option>
+                          <option value="party">Beach Party</option>
+                          <option value="corporate">Corporate Event</option>
+                          <option value="photoshoot">Photo Shoot</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                      <div className="form-group" style={{ marginBottom: '1rem' }}>
+                        <label htmlFor="date" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Event Date</label>
+                        <input type="date" id="date" name="date" style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
+                      </div>
+                      <div className="form-group" style={{ marginBottom: '1rem' }}>
+                        <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Message *</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell us about your event requirements..." required style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px', resize: 'vertical' }}></textarea>
+                      </div>
+                      <button type="submit" className="submit-btn" style={{ width: '100%', padding: '1rem', background: '#2d5a27', color: 'white', border: 'none', borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer' }}>Send Message</button>
+                      {showSuccess && (
+                        <div style={{ marginTop: '1.5rem', color: '#2d5a27', fontWeight: 600, fontSize: '1.1rem', background: '#e8f5e8', padding: '1rem', borderRadius: '8px', textAlign: 'center' }}>
+                          Thank you for contacting us! We have received your message and will get back to you soon.
+                        </div>
+                      )}
+                    </form>
                   </div>
                 </div>
-                
-                <div className="contact-form-container">
-                  <h3>Send us a Message</h3>
-                  <form className="contact-form" onSubmit={(e) => {
-                    e.preventDefault();
-                    setShowSuccess(true);
-                    setTimeout(() => setShowSuccess(false), 5000);
-                  }}>
-                    <div className="form-group" style={{ marginBottom: '1rem' }}>
-                      <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Full Name *</label>
-                      <input type="text" id="name" name="name" required style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
-                    </div>
-                    <div className="form-group" style={{ marginBottom: '1rem' }}>
-                      <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Email Address *</label>
-                      <input type="email" id="email" name="email" required style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
-                    </div>
-                    <div className="form-group" style={{ marginBottom: '1rem' }}>
-                      <label htmlFor="phone" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Phone Number</label>
-                      <input type="tel" id="phone" name="phone" style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
-                    </div>
-                    <div className="form-group" style={{ marginBottom: '1rem' }}>
-                      <label htmlFor="event-type" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Event Type</label>
-                      <select id="event-type" name="event-type" style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }}>
-                        <option value="">Select Event Type</option>
-                        <option value="wedding">Beach Wedding</option>
-                        <option value="party">Beach Party</option>
-                        <option value="corporate">Corporate Event</option>
-                        <option value="photoshoot">Photo Shoot</option>
-                        <option value="other">Other</option>
-                      </select>
-                    </div>
-                    <div className="form-group" style={{ marginBottom: '1rem' }}>
-                      <label htmlFor="date" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Event Date</label>
-                      <input type="date" id="date" name="date" style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px' }} />
-                    </div>
-                    <div className="form-group" style={{ marginBottom: '1rem' }}>
-                      <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>Message *</label>
-                      <textarea id="message" name="message" rows="5" placeholder="Tell us about your event requirements..." required style={{ width: '100%', padding: '0.8rem', border: '1px solid #ddd', borderRadius: '8px', resize: 'vertical' }}></textarea>
-                    </div>
-                    <button type="submit" className="submit-btn" style={{ width: '100%', padding: '1rem', background: '#2d5a27', color: 'white', border: 'none', borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer' }}>Send Message</button>
-                    {showSuccess && (
-                      <div style={{marginTop: '1.5rem', color: '#2d5a27', fontWeight: 600, fontSize: '1.1rem', background: '#e8f5e8', padding: '1rem', borderRadius: '8px', textAlign: 'center'}}>
-                        Thank you for contacting us! We have received your message and will get back to you soon.
-                      </div>
-                    )}
-                  </form>
-                </div>
-              </div>
               </div>
             </section>
           </div>
@@ -1869,7 +1869,7 @@ function App() {
             </div>
           );
         }
-        
+
         const relatedProducts = productCategories
           .flatMap(cat => cat.products)
           .filter(p => p.id !== selectedProduct.id)
@@ -1892,8 +1892,8 @@ function App() {
                 position: 'sticky',
                 top: '120px'
               }}>
-                <img 
-                  src={selectedProduct.images ? selectedProduct.images[activeImageIndex] : selectedProduct.image} 
+                <img
+                  src={selectedProduct.images ? selectedProduct.images[activeImageIndex] : selectedProduct.image}
                   alt={selectedProduct.name}
                   style={{
                     width: '100%',
@@ -1904,7 +1904,7 @@ function App() {
                     marginBottom: '20px'
                   }}
                 />
-                
+
                 {/* Thumbnail Gallery */}
                 {selectedProduct.images && selectedProduct.images.length > 1 && (
                   <div style={{
@@ -1946,7 +1946,7 @@ function App() {
                   marginBottom: '15px',
                   fontWeight: '700'
                 }}>{selectedProduct.name}</h2>
-                
+
                 <div style={{
                   background: '#4CAF50',
                   color: 'white',
@@ -1956,7 +1956,7 @@ function App() {
                   display: 'inline-block',
                   marginBottom: '15px'
                 }}>Premium Rental</div>
-                
+
                 <div style={{
                   fontSize: '1.1em',
                   lineHeight: '1.6',
@@ -2062,14 +2062,14 @@ function App() {
                       e.target.style.transform = 'translateY(0)';
                     }}
                   >
-                    <img 
-                      src="/assets/whatsapp.png" 
-                      alt="WhatsApp" 
-                      style={{ 
-                        width: '20px', 
-                        height: '20px', 
+                    <img
+                      src="/assets/whatsapp.png"
+                      alt="WhatsApp"
+                      style={{
+                        width: '20px',
+                        height: '20px',
                         objectFit: 'contain'
-                      }} 
+                      }}
                     />
                     Inquire Now
                   </button>
@@ -2144,8 +2144,8 @@ function App() {
                         e.currentTarget.style.transform = 'translateY(0)';
                       }}
                     >
-                      <img 
-                        src={product.image} 
+                      <img
+                        src={product.image}
                         alt={product.name}
                         style={{
                           width: '100%',
@@ -2254,28 +2254,28 @@ function App() {
             background: 'transparent',
             backgroundColor: 'transparent'
           }}>
-            <div className="logo" style={{ 
-              color: 'white', 
-              textShadow: '2px 2px 4px rgba(0,0,0,0.3)', 
-              display: 'flex', 
-              alignItems: 'center', 
+            <div className="logo" style={{
+              color: 'white',
+              textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+              display: 'flex',
+              alignItems: 'center',
               gap: '1rem',
               background: 'transparent',
               backgroundColor: 'transparent'
             }}>
-              <img 
-                src="/assets/logo.png" 
-                alt="Eco-friendly Beach Rentals Logo" 
-                style={{ 
-                  height: '70px', 
-                  width: 'auto', 
+              <img
+                src="/assets/logo.png"
+                alt="Eco-friendly Beach Rentals Logo"
+                style={{
+                  height: '70px',
+                  width: 'auto',
                   cursor: 'pointer',
                   filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
-                }} 
+                }}
                 onClick={() => navigateToPage('home')}
               />
             </div>
-            
+
             {/* Desktop navigation */}
             <nav className="nav nav-centered desktop-nav" style={{
               background: 'transparent',
@@ -2289,11 +2289,11 @@ function App() {
                   className={`nav-item ${currentPage === item.id ? 'active' : ''}`}
                   onClick={() => navigateToPage(item.id)}
                   style={{
-                    color: currentPage === item.id ? '#fff' : 
-                           (currentPage === 'product-details' ? '#333' : 'rgba(255, 255, 255, 0.9)'),
-                    background: currentPage === 'product-details' ? 
-                               (currentPage === item.id ? '#4CAF50' : 'rgba(255, 255, 255, 0.8)') : 
-                               'transparent',
+                    color: currentPage === item.id ? '#fff' :
+                      (currentPage === 'product-details' ? '#333' : 'rgba(255, 255, 255, 0.9)'),
+                    background: currentPage === 'product-details' ?
+                      (currentPage === item.id ? '#4CAF50' : 'rgba(255, 255, 255, 0.8)') :
+                      'transparent',
                     border: currentPage === 'product-details' ? '1px solid rgba(0,0,0,0.1)' : 'none',
                     borderRadius: '20px',
                     padding: '0.6rem 1.2rem',
@@ -2308,9 +2308,9 @@ function App() {
                 </button>
               ))}
             </nav>
-            
+
             {/* Hamburger icon for mobile */}
-            <button 
+            <button
               className="mobile-menu-btn"
               aria-label="Open menu"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -2371,7 +2371,7 @@ function App() {
                 </div>
               </div>
             </div>
-            
+
             {/* Animated scroll down button */}
             <div className="scroll-down-button" style={{
               position: 'absolute',
@@ -2408,7 +2408,7 @@ function App() {
                 transition: 'all 0.3s ease'
               }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255, 255, 255, 0.8)" strokeWidth="2">
-                  <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                  <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
                 </svg>
               </div>
               <span style={{
@@ -2419,7 +2419,7 @@ function App() {
                 letterSpacing: '1px'
               }}>SCROLL</span>
             </div>
-            
+
             {/* CSS override for perfect centering with animation */}
             <style>{`
               .carousel-hero .scroll-down-button {
@@ -2443,7 +2443,7 @@ function App() {
             `}</style>
           </section>
         ) : currentPage !== 'products' && currentPage !== 'product-details' ? (
-          <section className="hero" style={{backgroundImage: `url(${heroImages[currentPage]})`}}>
+          <section className="hero" style={{ backgroundImage: `url(${heroImages[currentPage]})` }}>
             <div className="hero-overlay">
               <div className="container">
                 <div className="hero-content">
@@ -2463,7 +2463,7 @@ function App() {
 
       <footer className="footer">
         <div className="container">
-          <div className="footer-content" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem', textAlign: 'left'}}>
+          <div className="footer-content" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2rem', textAlign: 'left' }}>
             <div className="footer-section">
               <h3>Eco-friendly Beach Rentals</h3>
               <p>Sustainable beach event rentals in Diani Beach, Kenya</p>
@@ -2472,7 +2472,7 @@ function App() {
             </div>
             <div className="footer-section">
               <h3>Our Services</h3>
-              <ul style={{listStyle: 'none', padding: 0}}>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); viewProductDetails('weddings'); }} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>💒 Weddings</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); viewProductDetails('events'); }} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>🎉 Events</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); viewProductDetails('experiences'); }} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>✨ Experiences</a></li>
@@ -2480,7 +2480,7 @@ function App() {
             </div>
             <div className="footer-section">
               <h3>Quick Links</h3>
-              <ul style={{listStyle: 'none', padding: 0}}>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('about'); }}>About Us</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('products'); }}>Products</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); navigateToPage('contact'); }}>Contact Us</a></li>
@@ -2504,7 +2504,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="footer-bottom" style={{textAlign: 'center', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.2)', opacity: 0.9}}>
+          <div className="footer-bottom" style={{ textAlign: 'center', paddingTop: '2rem', borderTop: '1px solid rgba(255,255,255,0.2)', opacity: 0.9 }}>
             <p>&copy; 2025 Eco-friendly Beach Rentals. All rights reserved. | Designed for sustainable beach events</p>
           </div>
         </div>
